@@ -61,7 +61,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
               "rounded-lg",
               "flex items-center justify-center",
               "group-data-[selected=true]:bg-transparent",
-              "!text-default-500",
+              "!text-foreground",
               "pt-px",
               "px-0",
               "mx-0",
@@ -71,9 +71,9 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
         })}
       >
         {!isSelected || isSSR ? (
-          <SunFilledIcon size={22} />
+          <SunFilledIcon size={26} />
         ) : (
-          <MoonFilledIcon size={22} />
+          <MoonFilledIcon size={26} />
         )}
       </div>
     </Component>
