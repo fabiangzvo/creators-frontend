@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { twMerge } from "tailwind-merge";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, } from "@heroui/dropdown";
 import { User } from "@heroui/user";
 
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -28,17 +28,12 @@ function UserOptions(_: UserOptionsProps): JSX.Element {
               name=""
             />
           </DropdownTrigger>
-          <DropdownMenu aria-label="User Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-bold">Signed in as</p>
-              <p className="font-bold">@tonyreichert</p>
+          <DropdownMenu aria-label="User Actions" variant="flat" disabledKeys={["profile"]}>
+            <DropdownItem key="profile" className="h-14 gap-2 opacity-100">
+              <p className="font-bold ">Signed in as</p>
+              <p className="font-bold">Faguzman.97@gmail.com</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="settings">Profile</DropdownItem>
             <DropdownItem key="logout" color="danger">
               Log Out
             </DropdownItem>

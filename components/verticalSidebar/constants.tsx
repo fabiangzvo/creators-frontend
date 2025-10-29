@@ -1,4 +1,4 @@
-import { ChartLine, PanelLeftOpen, LayoutDashboard, Send, ImagePlus } from "lucide-react";
+import { ChartLine, PanelLeftOpen, LayoutDashboard, Send, Image } from "lucide-react";
 
 import { MenuItemProps } from "./components/menuItem/types";
 
@@ -18,10 +18,10 @@ export const MENU_ITEMS: (Omit<MenuItemProps, 'isExpanded'> & { key: string })[]
     link: '/dashboard',
   },
   {
-    key: 'create',
-    name: 'Crear contenido',
-    icon: <ImagePlus size={26} />,
-    link: '/create',
+    key: 'posts',
+    name: 'Publicaciones',
+    icon: <Image size={26} />,
+    link: '/posts',
   },
   {
     key: 'channels',
