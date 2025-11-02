@@ -9,6 +9,7 @@ import {
 import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
 import { Input } from "@heroui/input";
+import { lazy } from "react";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -16,6 +17,7 @@ import {
   GithubIcon,
   SearchIcon,
 } from "@/components/icons";
+const UserOptions = lazy(()=>import("./verticalSidebar/components/userOptions"));
 
 export const Navbar = () => {
   const searchInput = (
@@ -45,7 +47,8 @@ export const Navbar = () => {
         className="hidden sm:flex basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        <NavbarItem className="hidden lg:flex"><ThemeSwitch /></NavbarItem>
+        <NavbarItem className="hidden lg:flex"><UserOptions /></NavbarItem>
         </NavbarContent>
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <Link isExternal aria-label="Github" href={siteConfig.links.github}>

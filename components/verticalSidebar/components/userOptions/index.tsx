@@ -1,22 +1,10 @@
 import { JSX } from "react";
-import { twMerge } from "tailwind-merge";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, } from "@heroui/dropdown";
 import { User } from "@heroui/user";
 
-import { ThemeSwitch } from "@/components/theme-switch";
-
-import { UserOptionsProps } from "./types";
-
-function UserOptions(_: UserOptionsProps): JSX.Element {
-
+function UserOptions(): JSX.Element {
   return (
-    <div className="absolute bottom-0 flex flex-col justify-center items-center gap-4 w-full">
-      <ThemeSwitch />
-      <div className={
-        twMerge(
-          "w-full flex justify-center items-center mb-6",
-        )
-      }>
+    <div className="flex justify-end items-center gap-4 w-full">
         <Dropdown placement="bottom-start">
           <DropdownTrigger>
             <User
@@ -40,8 +28,7 @@ function UserOptions(_: UserOptionsProps): JSX.Element {
           </DropdownMenu>
         </Dropdown>
       </div>
-    </div>
-  )
+    )
 }
 
 export default UserOptions

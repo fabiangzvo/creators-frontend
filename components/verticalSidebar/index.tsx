@@ -63,7 +63,7 @@ export default function VerticalSidebar(): JSX.Element {
         </div>
       }
       onAction={toggleSection}
-      bottomContent={<UserOptions isExpanded={isExpanded} />}
+      //bottomContent={<UserOptions isExpanded={isExpanded} />}
     >
       {items}
     </Listbox >
