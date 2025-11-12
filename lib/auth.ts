@@ -1,23 +1,18 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { Pool } from "pg";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
+
+import * as schema from "../schema";
+
+const sql = neon(process.env.DATABASE_URL as string);
+const db = drizzle(sql, { schema });
 
 export const auth = betterAuth({
-  database: drizzleAdapter(
-    new Pool({
-      host: process.env.PGHOST,
-      database: process.env.PGDATABASE,
-      user: process.env.PGUSER,
-      password: process.env.PGPASSWORD,
-      ssl: {
-        rejectUnauthorized: false,
-      },
-    }),
-    {
-      provider: "pg",
-    }
-  ),
+  database: drizzleAdapter(db, {
+    provider: "pg",
+  }),
   emailAndPassword: {
     enabled: true,
   },

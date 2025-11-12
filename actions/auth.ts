@@ -37,3 +37,18 @@ export async function signOut(): Promise<any> {
 
   redirect("/");
 }
+
+export async function socialSignIn(): Promise<any> {
+  try {
+    const result = await auth.api.signInSocial({
+      body: {
+        provider: "facebook",
+        callbackURL: "/dashboard",
+      },
+    });
+
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}

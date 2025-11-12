@@ -1,7 +1,8 @@
 
 "use client"
 import { Button } from '@heroui/button'
-import { auth } from "@/lib/auth";
+
+import { authClient } from '@/lib/auth-client';
 
 //const APP_ID = "1380955649866230"
 
@@ -10,20 +11,7 @@ function FbChannelButton({
 }: any) {
 
   const handleClick = async () => {
-    const response = await auth.api.signInSocial({
-      body: {
-        provider: "facebook",
-        callbackURL: "/dashboard",
-        scopes: [
-          "email",
-          "public_profile",
-          "pages_manage_posts",
-          "pages_read_engagement",
-          "pages_manage_engagement",
-          "instagram_basic"
-        ]
-      }
-    })
+    const response = await authClient.signIn.social({provider: "facebook", callbackURL: "/dashboard"})
     console.log(response)
   }
 
