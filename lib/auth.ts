@@ -23,12 +23,10 @@ export const auth = betterAuth({
       clientId: "1380955649866230",
       clientSecret: "4325b8a0b552f5eadf5f04ab1b6e2ab3",
       scope: [
-        "email",
         "public_profile",
         "pages_manage_posts",
         "pages_read_engagement",
         "pages_manage_engagement",
-        "instagram_basic",
       ],
     },
   },
