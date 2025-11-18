@@ -20,8 +20,8 @@ export const auth = betterAuth({
   socialProviders: {
     facebook: {
       enabled: true,
-      clientId: "1380955649866230",
-      clientSecret: "4325b8a0b552f5eadf5f04ab1b6e2ab3",
+      clientId: "1504971340778448",
+      clientSecret: "6bd263fba830a15bb178870fecdb34cc",
       scope: [
         "public_profile",
         "pages_manage_posts",

@@ -1,9 +1,16 @@
-import { JSX } from "react";
-import FbChannelButton from "../../components/facebookButton";
+"use client"
 
-function Channels():JSX.Element {
+import { JSX } from "react";
+
+import { authClient } from "@/lib/auth-client";
+
+function Channels(): JSX.Element {
+  const client = authClient.useSession();
+
+  console.log(client)
   return (<div className=" h-full w-full">Channels
-  <FbChannelButton />
+    {JSON.stringify(client)}
+
   </div>);
 }
 
