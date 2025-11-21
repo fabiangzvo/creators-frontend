@@ -20,14 +20,19 @@ export const auth = betterAuth({
   socialProviders: {
     facebook: {
       enabled: true,
-      clientId: "1504971340778448",
-      clientSecret: "6bd263fba830a15bb178870fecdb34cc",
+      clientId: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID ?? "",
+      clientSecret: process.env.NEXT_PUBLIC_FACEBOOK_SECRET ?? "",
       scope: [
         "public_profile",
         "pages_manage_posts",
         "pages_read_engagement",
         "pages_manage_engagement",
       ],
+    },
+    tiktok: {
+      clientSecret: process.env.NEXT_PUBLIC_TIKTOK_SECRET ?? "",
+      clientKey: process.env.NEXT_PUBLIC_TIKTOK_CLIENT_ID ?? "",
+      enabled: true,
     },
   },
 });

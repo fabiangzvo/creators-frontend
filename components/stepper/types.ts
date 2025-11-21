@@ -1,9 +1,9 @@
-import type { ButtonProps } from '@heroui/react'
+import type { ButtonProps } from "@heroui/button";
 
 export type RowStepProps = {
-  title?: React.ReactNode
-  className?: string
-}
+  title?: React.ReactNode;
+  className?: string;
+};
 
 export interface StepperProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -11,39 +11,39 @@ export interface StepperProps extends React.HTMLAttributes<HTMLButtonElement> {
    *
    * @default []
    */
-  steps?: RowStepProps[]
+  steps?: RowStepProps[];
   /**
    * The color of the steps.
    *
    * @default "primary"
    */
-  color?: ButtonProps['color']
+  color?: ButtonProps["color"];
   /**
    * The current step index.
    */
-  currentStep?: number
+  currentStep?: number;
   /**
    * The default step index.
    *
    * @default 0
    */
-  defaultStep?: number
+  defaultStep?: number;
   /**
    * Whether to hide the progress bars.
    *
    * @default false
    */
-  hideProgressBars?: boolean
+  hideProgressBars?: boolean;
   /**
    * The custom class for the steps wrapper.
    */
-  className?: string
+  className?: string;
   /**
    * The custom class for the step.
    */
-  stepClassName?: string
+  stepClassName?: string;
   /**
    * Callback function when the step index changes.
    */
-  onStepChange?: (stepIndex: number) => void
+  onStepChange?: (stepIndex: number) => void;
 }
