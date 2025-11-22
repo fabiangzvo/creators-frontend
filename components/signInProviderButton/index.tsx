@@ -12,8 +12,7 @@ import { SignInProviderButtonProps } from "./types";
 export function SignInProviderButton(props: SignInProviderButtonProps): JSX.Element {
   const { name, provider, icon } = props;
 
-  const handleClick = useCallback(async () =>
-    await authClient.signIn.social({ provider, callbackURL: `/channels/create/${provider}`, }),
+  const handleClick = useCallback(async () => await authClient.signIn.social({ provider, callbackURL: `/channels/create/${provider}`, }),
     [name, provider])
 
   return (
