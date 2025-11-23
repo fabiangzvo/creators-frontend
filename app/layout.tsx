@@ -48,7 +48,7 @@ export default function RootLayout({
             <VerticalSidebar />
             <div className="flex flex-col min-h-screen w-full">
               <Navbar />
-              <main className="w-full h-full">
+              <main className="w-full h-full flex justify-center">
                 {children}
               </main>
               <footer className="w-full flex items-center justify-center py-3 mt-52">

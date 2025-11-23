@@ -1,21 +1,27 @@
-import { JSX } from "react";
-import { headers } from "next/headers";
+import { FunctionComponent, JSX } from "react";
 
-import { auth } from "@/lib/auth";
+import { Provider } from "@/types/providers";
+import FacebookForm from "@/components/facebookForm";
+import InstagramForm from "@/components/instagramForm";
+import YoutubeForm from "@/components/youtubeForm";
+import TiktokForm from "@/components/tiktokForm";
 
-interface Props {
-  params: Promise<{ provider: string }>;
+import { ChannelProps } from "./types";
+
+const providers: Record<Provider, FunctionComponent> = {
+  facebook: FacebookForm,
+  instagram: InstagramForm,
+  youtube: YoutubeForm,
+  tiktok: TiktokForm
 }
 
-async function Channels({ params }: Props): Promise<JSX.Element> {
+async function Channels({ params }: ChannelProps): Promise<JSX.Element> {
   const { provider } = await params;
-  console.log(provider)
-  const session = await auth.api.getSession({ headers: await headers() })
 
+  const Form = providers[provider]
 
-  console.log(session)
-  return (<div className=" h-full w-full">Channels
-    {JSON.stringify(session)}
+  return (<div className="container">
+    <Form />
   </div>);
 }
 
