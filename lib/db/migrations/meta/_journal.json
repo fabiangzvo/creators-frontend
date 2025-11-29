@@ -8,6 +8,13 @@
       "when": 1764442129484,
       "tag": "0000_strong_doctor_faustus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1764445405581,
+      "tag": "0001_black_starbolt",
+      "breakpoints": true
     }
   ]
 }
