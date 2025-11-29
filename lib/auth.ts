@@ -1,14 +1,9 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
 import { genericOAuth } from "better-auth/plugins";
 
-import * as schema from "../schema";
-
-const sql = neon(process.env.DATABASE_URL as string);
-const db = drizzle(sql, { schema });
+import { db } from "./db";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -49,6 +44,19 @@ export const auth = betterAuth({
         "pages_read_engagement",
         "pages_manage_engagement",
       ],
+      async getUserInfo(token) {
+        console.log("TOKEN FACEBOOK:", JSON.stringify(token));
+        return {
+          user: {
+            id: "aaaa",
+            name: "aaaa",
+            email: "aaaa",
+            image: "aaaa",
+            emailVerified: true,
+          },
+          data: {},
+        };
+      },
     },
     tiktok: {
       clientSecret: process.env.NEXT_PUBLIC_TIKTOK_SECRET ?? "",
