@@ -9,6 +9,7 @@ import {
 
 import { user } from "./user";
 import { status } from "./status";
+import { provider } from "./provider";
 
 export const integration = pgTable("integration", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -18,6 +19,9 @@ export const integration = pgTable("integration", {
   enabled: boolean("enabled").default(true),
   softRemoved: boolean("soft_removed").default(false),
   settings: jsonb("settings"),
+  providerId: uuid("provider_id")
+    .notNull()
+    .references(() => provider.id, { onDelete: "cascade" }),
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
