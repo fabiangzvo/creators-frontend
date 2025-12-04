@@ -1,5 +1,5 @@
-import { Provider } from "@/types/providers";
+import { Providers } from "@/types/providers";
 
 export interface ChannelProps {
-  params: Promise<{ provider: Provider }>;
+  params: Promise<{ provider: Providers }>;
 }

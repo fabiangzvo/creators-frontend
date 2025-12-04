@@ -1,15 +1,17 @@
-"use client"
-
 import { JSX } from "react";
 import { Button } from "@heroui/button";
 import { PlusIcon } from "lucide-react";
 import { Tooltip } from "@heroui/tooltip";
 import { Link } from "@heroui/link";
+import { headers } from "next/headers";
 
-import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import ChannelList from "@/components/channelList";
 
-function Channels(): JSX.Element {
-  const client = authClient.useSession();
+async function Channels(): Promise<JSX.Element> {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   return (
     <div className="container flex flex-col">
@@ -29,11 +31,7 @@ function Channels(): JSX.Element {
           </Tooltip>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <p className="text-foreground/70" >Todavía no has conectado ningún canal.</p>
-        <Link href="/channels/create" className="font-semibold">¡Crea una integración para empezar!</Link>
-      </div>
-
+      <ChannelList />
     </div>
   );
 }

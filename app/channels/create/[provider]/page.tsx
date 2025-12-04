@@ -1,6 +1,6 @@
 import { FunctionComponent, JSX } from "react";
 
-import { Provider } from "@/types/providers";
+import { Providers } from "@/types/providers";
 import FacebookForm from "@/components/facebookForm";
 import InstagramForm from "@/components/instagramForm";
 import YoutubeForm from "@/components/youtubeForm";
@@ -8,7 +8,7 @@ import TiktokForm from "@/components/tiktokForm";
 
 import { ChannelProps } from "./types";
 
-const providers: Record<Provider, FunctionComponent> = {
+const providers: Record<Providers, FunctionComponent> = {
   facebook: FacebookForm,
   instagram: InstagramForm,
   youtube: YoutubeForm,
