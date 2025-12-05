@@ -21,7 +21,8 @@ function ChannelList(): JSX.Element {
   const { data:
     { data = [], count = 0 } = {},
     error,
-    isLoading
+    isLoading,
+    mutate
   } = useFetch<PaginatedResponse<Integration>>(
     "/integrations",
     {
@@ -29,11 +30,15 @@ function ChannelList(): JSX.Element {
       queryParams: {
         page: filters.page,
         limit: filters.limit,
+        filters: {
+          softRemoved: false,
+          enabled: true
+        }
       },
     });
 
   const cards = useMemo(() => data?.map(
-    (integration: Integration) => <ChannelCard key={integration.id} {...integration} />),
+    (integration: Integration) => <ChannelCard key={integration.id} refresh={mutate} {...integration} />),
     [data]);
 
   if (isLoading) return <Loader />;

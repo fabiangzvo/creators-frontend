@@ -6,12 +6,11 @@ import { Divider } from "@heroui/divider";
 import { Image } from "@heroui/image";
 import { Snippet } from "@heroui/snippet";
 
-import { Integration } from '@/types/integrations'
-
 import ActionButton from "../actionButton";
+import { ChannelCardProps } from './types'
 
-function ChannelCard(props: Integration): JSX.Element {
-  const { id, name, status, provider, accountId, apiKey } = props;
+function ChannelCard(props: ChannelCardProps): JSX.Element {
+  const { id, name, status, provider, accountId, apiKey, refresh } = props;
 
   return (
     <Card className="max-w-[400px]" >
@@ -25,11 +24,11 @@ function ChannelCard(props: Integration): JSX.Element {
             width={40}
           />
           <div className="flex flex-col">
-            <p className="text-md">{name}</p>
+            <p className="text-md line-clamp-1">{name}</p>
             <p className="text-small text-primary-500">{status.name || "Inactivo"}</p>
           </div>
         </div>
-        <ActionButton integrationId={id} />
+        <ActionButton integrationId={id} refresh={refresh} />
       </CardHeader>
       <Divider />
       <CardBody className="grid grid-cols-2 gap-4">
