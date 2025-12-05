@@ -13,16 +13,29 @@ function urlBuilder(baseUrl: string, params?: Record<string, any>): string {
 
   const queryString = new URLSearchParams();
 
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== null && value !== undefined && value !== "") {
-      if (Array.isArray(value)) {
-        value.forEach((v) => queryString.append(key, v));
-      } else {
-        queryString.append(key, String(value));
-      }
-    }
-  });
+  const flattenParams = (obj: Record<string, any>, prefix = "") => {
+    Object.entries(obj).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === "") return;
 
+      const fullKey = prefix ? `${prefix}[${key}]` : key;
+
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          if (typeof item === "object" && item !== null) {
+            flattenParams({ [key]: item }, prefix);
+          } else {
+            queryString.append(fullKey, String(item));
+          }
+        });
+      } else if (typeof value === "object" && value !== null) {
+        queryString.append(fullKey, JSON.stringify(value));
+      } else {
+        queryString.append(fullKey, String(value));
+      }
+    });
+  };
+
+  flattenParams(params);
   return `${baseUrl}?${queryString.toString()}`;
 }
 
