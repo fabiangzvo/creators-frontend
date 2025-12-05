@@ -32,7 +32,6 @@ function ChannelList(): JSX.Element {
         limit: filters.limit,
         filters: {
           softRemoved: false,
-          enabled: true
         }
       },
     });

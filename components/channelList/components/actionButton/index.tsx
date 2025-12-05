@@ -5,7 +5,7 @@ import { MoreVertical } from 'lucide-react'
 import { addToast } from "@heroui/toast"
 import { useRouter } from "next/navigation"
 
-import { deleteIntegration } from "@/actions/integration"
+import { changeStatus, deleteIntegration } from "@/actions/integration"
 import { useConfirm } from "@/hooks/useConfirm"
 
 import { ACTIONS } from "../../constants"
@@ -13,7 +13,7 @@ import { ActionButtonProps } from "./types"
 import { buttonVariants } from "./variants"
 
 function ActionButton(props: ActionButtonProps): JSX.Element {
-  const { integrationId, refresh } = props;
+  const { integrationId, refresh, status } = props;
 
   const router = useRouter();
   const { confirm, ConfirmDialog } = useConfirm();
@@ -40,13 +40,36 @@ function ActionButton(props: ActionButtonProps): JSX.Element {
           }
         })
         break;
+      case "status":
+        const isActive = status === 'active';
+
+        confirm({
+          title: isActive ? 'Desactivar canal' : 'Activar canal',
+          message: '¿Estás seguro de que deseas ' + (isActive ? 'desactivar' : 'activar') + ' este canal?',
+          confirmText: isActive ? 'Desactivar' : 'Activar',
+          cancelText: 'Cancelar',
+          isDangerous: true,
+          onConfirm: async () => {
+            const wasUpdated = await changeStatus(integrationId);
+
+            refresh();
+            addToast({
+              variant: "flat",
+              title: "Actualizar estado",
+              description: wasUpdated ? "Estado actualizado" : "Error al actualizar estado",
+              color: wasUpdated ? "success" : "danger",
+            });
+          }
+        })
+
+        break;
       case "edit":
         router.push(`/channels/${integrationId}/edit`);
         break;
       default:
         console.log("action not supported", action);
     }
-  }, [integrationId, router]);
+  }, [integrationId, router, status]);
 
   return (<Fragment>
     <Dropdown >
