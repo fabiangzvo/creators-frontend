@@ -36,7 +36,6 @@ function ChannelList(): JSX.Element {
     (integration: Integration) => <ChannelCard key={integration.id} {...integration} />),
     [data]);
 
-
   if (isLoading) return <Loader />;
 
   if (error) return <div>Error: {error.message}</div>;

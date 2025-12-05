@@ -13,11 +13,8 @@ import { lazy } from "react";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  GithubIcon,
-  SearchIcon,
-} from "@/components/icons";
-const UserOptions = lazy(()=>import("./verticalSidebar/components/userOptions"));
+import { GithubIcon, SearchIcon } from "lucide-react";
+const UserOptions = lazy(() => import("./verticalSidebar/components/userOptions"));
 
 export const Navbar = () => {
   const searchInput = (
@@ -49,7 +46,7 @@ export const Navbar = () => {
       >
         <NavbarItem className="hidden lg:flex"><ThemeSwitch /></NavbarItem>
         <NavbarItem className="hidden lg:flex"><UserOptions /></NavbarItem>
-        </NavbarContent>
+      </NavbarContent>
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <Link isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />
