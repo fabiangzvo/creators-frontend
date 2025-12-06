@@ -4,6 +4,7 @@ import { nextCookies } from "better-auth/next-js";
 import { genericOAuth } from "better-auth/plugins";
 
 import { db } from "./db";
+import { getLongLivedFacebookToken } from "@/actions/facebook";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -46,6 +47,15 @@ export const auth = betterAuth({
       ],
       async getUserInfo(token) {
         console.log("TOKEN FACEBOOK:", JSON.stringify(token));
+        /**
+         * {"tokenType":"bearer","accessToken":"EAAVYw3IqC9ABQBCdTpJBKHZCJdZCF0Rdp3d0PQZBXUlOknxoxTjhH9cpoq05XKOjNtZAXYGN102KV3h566JNpsORQdsZBEZA5FdzODXnMeVLBp9aYJHCNm3PpZAqjc7I60HucK9b2eztGPZCEmRnw7CJKUhlYe9miiH3I5ThWRzWJoe1R3nxuGuu1oRWQhYsEyyrZBPtvZBhzKA0RsPIq7QbcSLrqnJDXctusPKZCSZBfmRDScnUeHWzsgyilPhSvZAdSIleqbUkgSJnIPUMuDywGUcBJctzakUkpyrA7","accessTokenExpiresAt":"2026-02-04T00:21:04.891Z","scopes":[]}
+         */
+
+        const response = await getLongLivedFacebookToken(
+          token.accessToken as string
+        );
+
+        console.log("RESPONSE FACEBOOK:", JSON.stringify(response));
         return {
           user: {
             id: "aaaa",
