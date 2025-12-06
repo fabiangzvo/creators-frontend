@@ -5,7 +5,6 @@ import FacebookForm from "@/components/facebookForm";
 import InstagramForm from "@/components/instagramForm";
 import YoutubeForm from "@/components/youtubeForm";
 import TiktokForm from "@/components/tiktokForm";
-
 import { ChannelProps } from "./types";
 
 const providers: Record<Providers, FunctionComponent> = {
@@ -17,7 +16,7 @@ const providers: Record<Providers, FunctionComponent> = {
 
 async function Channels({ params }: ChannelProps): Promise<JSX.Element> {
   const { provider } = await params;
-
+  
   const Form = providers[provider]
 
   return (<div className="container">
