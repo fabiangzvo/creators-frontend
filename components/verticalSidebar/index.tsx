@@ -35,6 +35,7 @@ export default function VerticalSidebar(): JSX.Element {
       />
     }
     href={item?.link}
+    textValue={item.name}
   >
     <span className={twMerge("font-normal ml-2", isExpanded ? 'block' : 'hidden')}>{item.name}</span>
   </ListboxItem>
@@ -63,7 +64,7 @@ export default function VerticalSidebar(): JSX.Element {
         </div>
       }
       onAction={toggleSection}
-      //bottomContent={<UserOptions isExpanded={isExpanded} />}
+    //bottomContent={<UserOptions isExpanded={isExpanded} />}
     >
       {items}
     </Listbox >

@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Link } from "@heroui/link";
-import { Listbox, ListboxItem } from "@heroui/listbox";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
@@ -55,11 +54,11 @@ export default function RootLayout({
                 <Link
                   isExternal
                   className="flex items-center gap-1 text-current"
-                  href="https://heroui.com?utm_source=next-app-template"
-                  title="heroui.com homepage"
+                  href="https://linkedin.com/in/fabiangzvo"
+                  title="Fabian Guzmán Otavo LinkedIn profile"
                 >
                   <span className="text-default-600">Powered by</span>
-                  <p className="text-primary">HeroUI</p>
+                  <p className="text-primary">@fabiangzvo</p>
                 </Link>
               </footer>
             </div>

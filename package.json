@@ -34,6 +34,7 @@
     "@heroui/theme": "2.4.20",
     "@heroui/toast": "^2.0.17",
     "@heroui/user": "^2.2.22",
+    "@hookform/resolvers": "^5.2.2",
     "@neondatabase/serverless": "^1.0.2",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/visually-hidden": "3.8.26",
@@ -60,8 +61,11 @@
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-filepond": "^7.1.3",
+    "react-hook-form": "^7.68.0",
     "swr": "^2.3.7",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.1.13",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "15.4.6",
