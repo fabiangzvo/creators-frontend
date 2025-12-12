@@ -1,12 +1,14 @@
 
 "use client"
 
-import { useCallback, JSX } from "react";
-import { Button } from '@heroui/button'
+import { useCallback, JSX, useMemo } from "react";
+import { Card } from "@heroui/card";
 
 import { authClient } from '@/lib/auth-client';
 
 import { SignInProviderButtonProps } from "./types";
+import { IconContainerVariants, iconContainerVariants, iconVariants } from "./variants";
+import { PROVIDER_ICONS } from "./constants";
 
 
 export function SignInProviderButton(props: SignInProviderButtonProps): JSX.Element {
@@ -15,12 +17,49 @@ export function SignInProviderButton(props: SignInProviderButtonProps): JSX.Elem
   const handleClick = useCallback(async () => await authClient.signIn.social({ provider, callbackURL: `/channels/create/${provider}`, }),
     [name, provider])
 
+  const backgroundIcon = useMemo(() => {
+    if (!provider) return null;
+
+    const IconComponent = PROVIDER_ICONS[provider];
+
+    return <IconComponent
+      isFilled
+      className={iconVariants({ variant: provider })}
+    />;
+  }, [provider])
+
   return (
-    <Button onPress={handleClick} key={provider} variant="bordered" className="h-28">
-      <div className="flex flex-col justify-center items-center gap-3">
-        <div className="w-12 h-12 bg-primary-100/50 rounded-full flex items-center justify-center">{icon}</div>
-        <p className="font-medium text-base">{name}</p>
+    <Card
+      key={provider}
+      isBlurred
+      isPressable
+      className="relative group cursor-pointer rounded-2xl p-6 h-52 transition-all duration-300 ease-out flex flex-col items-center justify-between overflow-hidden select-none animate-enter [animation-delay:500ms] dark:bg-foreground/10"
+      shadow="sm"
+      onPress={handleClick}
+    >
+      {/* <div
+        className={cardVariants({ variant: provider as CardVariants["variant"] })}
+      /> */}
+      <div
+        className="absolute -bottom-8 -right-8 w-40 h-40 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-primary-300 dark:text-primary-600 pointer-events-none transform rotate-12 opacity-10"
+      >
+        {backgroundIcon}
       </div>
-    </Button>
+
+      <div
+        className={iconContainerVariants({ variant: provider as IconContainerVariants["variant"] })}
+      >
+        {icon}
+      </div>
+
+      <div className="relative z-10 text-center">
+        <h3 className="text-2xl font-semibold mb-1 tracking-wide">{name}</h3>
+        <p
+          className="text-xs font-medium text-zinc-600 uppercase tracking-widest opacity-0 transition-all duration-500 group-hover:opacity-100 dark:text-zinc-400"
+        >
+          Conectar Perfil
+        </p>
+      </div>
+    </Card >
   )
 }

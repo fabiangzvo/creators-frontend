@@ -1,21 +1,24 @@
 "use client"
 
+import { JSX } from "react";
+
 import { IconProps } from "./types";
 
-export const TiktokIcon: React.FC<IconProps> = ({
-  size = 28,
-  className
-}) => {
+export function TiktokIcon(props: IconProps): JSX.Element {
+  const { size = 28, className } = props;
+
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
-      viewBox="0 0 16 16"
-      fill="currentColor"
+      viewBox="0 0 24 24"
       className={className}
     >
-      <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z" />
+      <path
+        d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.84-2.98 6.38-1.48 1.28-3.32 1.95-5.26 1.95-1.94 0-3.83-.69-5.32-1.95-1.84-1.53-2.96-3.85-2.96-6.38 0-2.52 1.12-4.84 2.96-6.38 1.48-1.28 3.32-1.95 5.26-1.95.61 0 1.21.08 1.81.24l-.01 4.12c-.51-.1-1.03-.15-1.55-.15-1.12 0-2.19.46-2.96 1.28-.77.81-1.2 1.9-1.2 3.03 0 1.12.43 2.22 1.2 3.03.77.81 1.84 1.28 2.96 1.28 1.12 0 2.19-.46 2.96-1.28.77-.81 1.2-1.9 1.2-3.03V.02h.01z"
+        fill="currentColor"
+      >
+      </path>
     </svg>
   );
-};
+}

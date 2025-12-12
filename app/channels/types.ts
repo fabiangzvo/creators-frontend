@@ -2,8 +2,8 @@ import { JSX } from "react";
 
 import { Providers } from "@/types/providers";
 
-export interface SignInProviderButtonProps {
-  name: string;
-  provider: Providers;
+export type ProviderConfig = {
+  key: Providers;
+  label: string;
   icon: JSX.Element;
-}
+};
