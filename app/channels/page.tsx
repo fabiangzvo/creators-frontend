@@ -3,16 +3,10 @@ import { Button } from "@heroui/button";
 import { PlusIcon } from "lucide-react";
 import { Tooltip } from "@heroui/tooltip";
 import { Link } from "@heroui/link";
-import { headers } from "next/headers";
 
-import { auth } from "@/lib/auth";
 import ChannelList from "@/components/channelList";
 
-async function Channels(): Promise<JSX.Element> {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
+function Channels(): JSX.Element {
   return (
     <div className="container flex flex-col">
       <div className="grid grid-cols-2 mb-8">

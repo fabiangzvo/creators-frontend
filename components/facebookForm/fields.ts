@@ -1,5 +1,5 @@
-import { StepConfig, FIELD_TYPES } from "@/components/formStepper";
 import { validators } from "@/components/formStepper/validators";
+import { StepConfig, FieldType } from "@/components/formStepper/types";
 
 export const FIELD_LIST: StepConfig[] = [
   {
@@ -11,7 +11,7 @@ export const FIELD_LIST: StepConfig[] = [
       {
         name: "firstName",
         label: "Nombre",
-        type: FIELD_TYPES.TEXT,
+        type: FieldType.TEXT,
         placeholder: "Juan",
         validations: [
           validators.required,
@@ -21,14 +21,14 @@ export const FIELD_LIST: StepConfig[] = [
       {
         name: "lastName",
         label: "Apellido",
-        type: FIELD_TYPES.TEXT,
+        type: FieldType.TEXT,
         placeholder: "Pérez",
         validations: [validators.required, validators.minLength(2)],
       },
       {
         name: "email",
         label: "Email",
-        type: FIELD_TYPES.EMAIL,
+        type: FieldType.EMAIL,
         placeholder: "juan@example.com",
         validations: [validators.required, validators.email],
         className: "md:col-span-2",
@@ -36,14 +36,14 @@ export const FIELD_LIST: StepConfig[] = [
       {
         name: "phone",
         label: "Teléfono",
-        type: FIELD_TYPES.TEL,
+        type: FieldType.TEL,
         placeholder: "1234567890",
         validations: [validators.required, validators.minLength(10)],
       },
       {
         name: "age",
         label: "Edad",
-        type: FIELD_TYPES.NUMBER,
+        type: FieldType.NUMBER,
         placeholder: "18",
         validations: [
           validators.required,

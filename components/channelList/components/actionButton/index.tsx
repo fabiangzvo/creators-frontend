@@ -67,7 +67,7 @@ function ActionButton(props: ActionButtonProps): JSX.Element {
         router.push(`/channels/${integrationId}/edit`);
         break;
       default:
-        console.log("action not supported", action);
+        console.warn("action not supported", action);
     }
   }, [integrationId, router, status]);
 

@@ -21,7 +21,8 @@ export async function getPages(
 
     return response.data.data as FacebookPageInfo[];
   } catch (e) {
-    console.log(e);
+    console.error(e);
+
     return [];
   }
 }

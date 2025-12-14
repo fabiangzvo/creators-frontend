@@ -49,6 +49,6 @@ export async function socialSignIn(): Promise<any> {
 
     return result;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }

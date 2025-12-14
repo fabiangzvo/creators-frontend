@@ -2,11 +2,12 @@
 
 import { JSX, useCallback, useMemo } from 'react';
 
-import { FIELD_TYPES, FormStepper } from '@/components/formStepper'
+import { FormStepper } from '@/components/formStepper'
 
 import { FormProps } from './types';
 import { FIELD_LIST } from '../../fields';
 import { validators } from '@/components/formStepper/validators';
+import { FieldType } from '@/components/formStepper/types';
 
 function Form(props: FormProps): JSX.Element {
   const { pages } = props;
@@ -28,10 +29,11 @@ function Form(props: FormProps): JSX.Element {
         fields: [
           {
             name: "page",
-            label: "Página",
-            type: FIELD_TYPES.LIST,
+            label: "Seleccionar página",
+            type: FieldType.LIST,
             options: pages,
-            validations: [validators.required]
+            selection: "single",
+            validations: [validators.required],
           },
         ],
       })
