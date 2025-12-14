@@ -9,7 +9,8 @@ import StepContent from './components/stepContent';
 import StepIndicator from './components/stepIndicator';
 
 
-export const FormStepper: React.FC<FormStepperProps> = ({ steps, onComplete }): JSX.Element => {
+export function FormStepper(props: FormStepperProps): JSX.Element {
+  const { steps, onComplete } = props;
   const currentStep = useCurrentStep();
 
   const currentStepConfig = steps[currentStep];
@@ -20,6 +21,6 @@ export const FormStepper: React.FC<FormStepperProps> = ({ steps, onComplete }): 
       <StepContent stepConfig={currentStepConfig} onComplete={onComplete} />
     </div>
   );
-};
+}
 
 
