@@ -42,7 +42,11 @@ export default function StepContent(props: StepContentProps): JSX.Element {
   }, [stepConfig, formData, errors, handleChange, handleBlur])
 
   return (
-    <Card className='p-4 h-full' shadow='none'>
+    <Card
+      id={stepConfig?.id || "step-content"}
+      className='p-4 h-full !bg-background'
+      shadow='none'
+    >
       <CardHeader className='flex flex-col items-start'>
         <h2 className="text-2xl font-bold">{stepConfig?.title}</h2>
         {stepConfig?.description && (

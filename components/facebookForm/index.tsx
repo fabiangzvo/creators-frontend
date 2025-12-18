@@ -25,7 +25,15 @@ async function FacebookForm(): Promise<JSX.Element> {
 
   return (
     <div className="px-4">
-      <Form pages={data.map(page => ({ value: page.id, title: page.name, image: page.picture.data.url }))} />
+      <Form
+        pages={data
+          .map(page => ({
+            value: page.id,
+            title: page.name,
+            image: page.picture.data.url
+          }))
+        }
+      />
     </div>
   )
 }

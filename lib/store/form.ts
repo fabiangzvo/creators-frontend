@@ -1,7 +1,14 @@
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
-import { FormDataType, FormErrors, StepConfig, FormStore } from "@/types/form";
+import {
+  FormDataType,
+  FormErrors,
+  StepConfig,
+  FormStore,
+  AnimationStep,
+  animationType,
+} from "@/types/form";
 import { FieldType, FieldConfig } from "@/components/formStepper/types";
 
 const createInitialFormData = (steps: StepConfig[]): FormDataType => {
@@ -29,6 +36,7 @@ export const useFormStore = create<FormStore>()(
         currentStep: 0,
         isSubmitting: false,
         steps: [],
+        animation: AnimationStep.INITIAL,
 
         // Initialize store with steps configuration
         initializeStore: (steps: StepConfig[]) => {
@@ -41,6 +49,7 @@ export const useFormStore = create<FormStore>()(
             touched: {},
             currentStep: 0,
             isSubmitting: false,
+            animation: AnimationStep.INITIAL,
           });
         },
 
@@ -67,10 +76,12 @@ export const useFormStore = create<FormStore>()(
 
         setIsSubmitting: (value: boolean) => set({ isSubmitting: value }),
 
+        setAnimation: (value: animationType) => set({ animation: value }),
+
         // Validation logic
         validateField: (field: FieldConfig, value: any): string | null => {
           if (!field.validations) return null;
-
+          console.log({ field, value });
           for (const validation of field.validations) {
             const error = validation(value);
             if (error) return error;
@@ -83,7 +94,7 @@ export const useFormStore = create<FormStore>()(
           const currentFields = state.steps[state.currentStep]?.fields || [];
           const newErrors: FormErrors = {};
           let isValid = true;
-
+          console.log({ currentFields });
           currentFields.forEach((field) => {
             // Skip disabled fields or fields that don't meet conditions
             if (
@@ -119,7 +130,6 @@ export const useFormStore = create<FormStore>()(
         handleChange: (fieldName: string, value: any) => {
           const state = get();
           state.setFormData(fieldName, value);
-
           // Validate on change only if field was already touched
           if (state.touched[fieldName]) {
             const field = state.steps
@@ -155,6 +165,7 @@ export const useFormStore = create<FormStore>()(
 
           if (isValid && !isLastStep) {
             state.setCurrentStep(state.currentStep + 1);
+            state.setAnimation(AnimationStep.LEFT);
           } else if (isValid && isLastStep) {
             state.setIsSubmitting(true);
             try {
@@ -171,6 +182,7 @@ export const useFormStore = create<FormStore>()(
           const state = get();
           if (state.currentStep > 0) {
             state.setCurrentStep(state.currentStep - 1);
+            state.setAnimation(AnimationStep.RIGHT);
           }
         },
 
@@ -178,6 +190,11 @@ export const useFormStore = create<FormStore>()(
           const state = get();
           if (step >= 0 && step < state.steps.length) {
             state.setCurrentStep(step);
+            state.setAnimation(
+              step > state.currentStep
+                ? AnimationStep.LEFT
+                : AnimationStep.RIGHT
+            );
           }
         },
 

@@ -17,6 +17,14 @@ export interface StepConfig {
   fields?: FieldConfig[];
 }
 
+export enum AnimationStep {
+  INITIAL = "initial",
+  LEFT = "left",
+  RIGHT = "right",
+}
+
+export type animationType = `${AnimationStep}`;
+
 interface FormStoreState {
   formData: FormDataType;
   errors: FormErrors;
@@ -24,6 +32,7 @@ interface FormStoreState {
   currentStep: number;
   isSubmitting: boolean;
   steps: StepConfig[];
+  animation: animationType;
 }
 
 interface FormStoreActions {
@@ -43,6 +52,7 @@ interface FormStoreActions {
   goToStep: (step: number) => void;
   resetForm: () => void;
   initializeStore: (steps: StepConfig[]) => void;
+  setAnimation: (value: animationType) => void;
 }
 
 export type FormStore = FormStoreState & FormStoreActions;

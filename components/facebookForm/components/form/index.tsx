@@ -3,14 +3,17 @@
 import { JSX, useCallback, useMemo } from 'react';
 
 import { FormStepper } from '@/components/formStepper'
+import { validators } from '@/components/formStepper/validators';
+import { FieldType } from '@/components/formStepper/types';
+import { useFormStore } from '@/lib/store/form';
 
 import { FormProps } from './types';
 import { FIELD_LIST } from '../../fields';
-import { validators } from '@/components/formStepper/validators';
-import { FieldType } from '@/components/formStepper/types';
 
 function Form(props: FormProps): JSX.Element {
   const { pages } = props;
+
+  const initializeStore = useFormStore((state) => state.initializeStore);
 
   const handleSubmit = useCallback(async (data: any) => {
     console.log('Formulario completado:', data);
@@ -23,7 +26,6 @@ function Form(props: FormProps): JSX.Element {
       steps.unshift({
         id: "selectPage",
         title: "Seleccionar página",
-        stepName: "Paso 1",
         description: "Selecciona la página que deseas conectar a creators",
         layout: "single",
         fields: [
@@ -33,13 +35,16 @@ function Form(props: FormProps): JSX.Element {
             type: FieldType.LIST,
             options: pages,
             selection: "single",
-            validations: [validators.required],
+            validations: [validators.custom((value: any) => value.length > 0, "Debes seleccionar al menos una página.")],
           },
         ],
       })
     }
+
+    initializeStore(steps);
+
     return steps;
-  }, [pages])
+  }, [pages, initializeStore])
 
   return (
     <FormStepper steps={steps} onComplete={handleSubmit} />

@@ -137,7 +137,7 @@ function DynamicField(props: DynamicFieldProps): JSX.Element | null {
             selectionMode={listField.selection}
             onSelectionChange={(e) => handleChange(field.name, Array.from(e))}
             items={listField.options}
-            bottomContent={error && <span className="text-xs text-danger-500 mt-2">{error}</span>}
+            bottomContent={error && <span className="text-xs text-danger-500 mt-1 font-normal">{error}</span>}
           >
             {(item) => (
               <ListboxItem
