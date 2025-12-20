@@ -1,4 +1,4 @@
-import { heroui } from "@heroui/theme";
+import { colors, heroui } from "@heroui/theme";
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -13,6 +13,11 @@ const config = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      colors:{
+        hero: {
+          primary: "color-mix(in oklab, hsl(var(--heroui-primary) / 1) 10%, transparent)",
+        },
+      }
     },
   },
   darkMode: "class",

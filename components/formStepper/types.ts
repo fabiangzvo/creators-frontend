@@ -49,6 +49,7 @@ export interface BaseFieldConfig {
   className?: string;
   validations?: ValidationFunction[];
   condition?: (formData: FormDataType) => boolean;
+  handleChange?: (value: any, formData: FormDataType) => void;
 }
 
 export interface TextareaFieldConfig extends BaseFieldConfig {
@@ -73,7 +74,7 @@ export interface CheckboxFieldConfig extends BaseFieldConfig {
 
 export interface FileFieldConfig extends BaseFieldConfig {
   type: FieldType.FILE;
-  accept?: string;
+  accept?: string[];
 }
 
 export interface ListFieldConfig extends BaseFieldConfig {
@@ -103,7 +104,7 @@ export enum LayoutEnum {
 
 export type LayoutType = `${LayoutEnum}`;
 
-interface StepComponentProps {
+export interface StepComponentProps {
   formData: FormDataType;
   errors: FormErrors;
   handleChange: (fieldName: string, value: any) => void;

@@ -1,9 +1,10 @@
 import { JSX } from 'react';
 
-import { useFormData } from '@/lib/store/form';
+import { type StepComponentProps } from '@/components/formStepper/types';
 
-function ConfirmationStep(): JSX.Element {
-  const formData = useFormData();
+function ConfirmationStep(props: StepComponentProps): JSX.Element {
+  const { formData } = props;
+
   return (
     <div>
       <h2>{JSON.stringify(formData)}</h2>

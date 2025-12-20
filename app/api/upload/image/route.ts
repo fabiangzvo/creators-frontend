@@ -3,12 +3,13 @@ import { del, head, put } from "@vercel/blob";
 
 export async function POST(request: Request): Promise<NextResponse> {
   const body = await request.formData();
-  const customField = request.headers.get("x-custom-field");
 
-  const file = body.getAll(customField!).at(-1) as File;
+  const file = body.get("image") as File;
 
   const { url } = await put(`media/${file.name}`, file, {
     access: "public",
+    allowOverwrite: true,
+    addRandomSuffix:true
   });
 
   const response = new NextResponse(url);
@@ -25,14 +26,22 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     "";
 
   const result = await fetch(load);
-  const _head = await head(load);
-
   const blob = await result.blob();
 
   const response = new NextResponse(blob);
 
-  response.headers.set("Content-Type", _head.contentType);
-  response.headers.set("Content-Disposition", _head.contentDisposition);
+  if (load.includes(request.headers.get("referer")!)) {
+    const _head = await head(load);
+
+    response.headers.set("Content-Type", _head.contentType);
+    response.headers.set("Content-Disposition", _head.contentDisposition);
+  } else {
+    response.headers.set("Content-Type", result.headers.get("Content-Type")!);
+    response.headers.set(
+      "Content-Disposition",
+      result.headers.get("Content-Disposition")!
+    );
+  }
 
   return response;
 }

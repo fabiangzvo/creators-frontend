@@ -81,7 +81,7 @@ export const useFormStore = create<FormStore>()(
         // Validation logic
         validateField: (field: FieldConfig, value: any): string | null => {
           if (!field.validations) return null;
-          console.log({ field, value });
+
           for (const validation of field.validations) {
             const error = validation(value);
             if (error) return error;
@@ -94,7 +94,7 @@ export const useFormStore = create<FormStore>()(
           const currentFields = state.steps[state.currentStep]?.fields || [];
           const newErrors: FormErrors = {};
           let isValid = true;
-          console.log({ currentFields });
+
           currentFields.forEach((field) => {
             // Skip disabled fields or fields that don't meet conditions
             if (

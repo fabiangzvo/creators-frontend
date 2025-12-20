@@ -1,3 +1,74 @@
 @import "tailwindcss";
 
-@config "../tailwind.config.js"
+@layer components {
+  /* Contenedor principal de FilePond */
+  .filepond--root {
+    @apply font-sans;
+  }
+
+  /* Panel de fondo */
+  .filepond--panel-root {
+    @apply bg-primary-100/40! dark:bg-primary-50/30! border-2 border-dashed border-primary-500 rounded-lg;
+  }
+
+  /* Área de drop */
+  .filepond--drop-label {
+    @apply text-gray-700 h-full! bg-primary-50! border-2 border-dashed border-primary-500 rounded-lg;
+  }
+
+  /* Contenedor del contenido de subida */
+  .upload-content {
+    @apply flex flex-col items-center gap-2 py-8;
+  }
+
+  /* Icono de subida */
+  .upload-icon {
+    @apply text-primary-500 mb-2;
+  }
+
+  /* Texto principal */
+  .upload-text {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  /* Subtítulo con info de formato */
+  .upload-subtitle {
+    @apply block text-xs text-gray-500 mt-1;
+  }
+
+  /* Hover state */
+  .filepond--panel-root:hover {
+    @apply border-primary-400 [background-color:none];
+  }
+
+  /* Estado cuando se arrastra un archivo encima */
+  .filepond--drip {
+    @apply [background-color:none];
+  }
+
+  /* Botón de acción */
+  .filepond--label-action {
+    @apply text-primary-600 font-semibold no-underline cursor-pointer;
+  }
+
+  .filepond--label-action:hover {
+    @apply text-primary-700;
+  }
+
+  /* Archivo cargado */
+  .filepond--file {
+    @apply text-gray-700;
+  }
+
+  /* Botón de eliminar */
+  .filepond--file-action-button {
+    @apply cursor-pointer;
+  }
+
+  /* Progress bar */
+  .filepond--file-status {
+    @apply text-sm text-gray-600;
+  }
+}
+
+@config "../tailwind.config.js";

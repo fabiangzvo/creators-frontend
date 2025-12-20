@@ -4,16 +4,18 @@ import { JSX, useCallback, useMemo } from 'react';
 
 import { FormStepper } from '@/components/formStepper'
 import { validators } from '@/components/formStepper/validators';
-import { FieldType } from '@/components/formStepper/types';
+import { FieldType, FormDataType } from '@/components/formStepper/types';
 import { useFormStore } from '@/lib/store/form';
 
 import { FormProps } from './types';
 import { FIELD_LIST } from '../../fields';
+import axios from 'axios';
 
 function Form(props: FormProps): JSX.Element {
   const { pages } = props;
 
   const initializeStore = useFormStore((state) => state.initializeStore);
+  const setFieldValue = useFormStore((state) => state.setFormData);
 
   const handleSubmit = useCallback(async (data: any) => {
     console.log('Formulario completado:', data);
@@ -36,6 +38,16 @@ function Form(props: FormProps): JSX.Element {
             options: pages,
             selection: "single",
             validations: [validators.custom((value: any) => value.length > 0, "Debes seleccionar al menos una página.")],
+            handleChange: async (value: string[]) => {
+              const selectedPage = value.map((id) => pages.find(page => page.value === id));
+
+              if (selectedPage[0]) {
+                console.log(selectedPage[0].image)
+                setFieldValue("name", selectedPage[0].title || "");
+
+                setFieldValue("image", [{ source: selectedPage[0].image }]);
+              }
+            }
           },
         ],
       })
@@ -44,7 +56,7 @@ function Form(props: FormProps): JSX.Element {
     initializeStore(steps);
 
     return steps;
-  }, [pages, initializeStore])
+  }, [pages, initializeStore, setFieldValue]);
 
   return (
     <FormStepper steps={steps} onComplete={handleSubmit} />

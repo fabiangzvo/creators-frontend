@@ -12,11 +12,12 @@ import { useFormStore } from '@/lib/store/form';
 
 export function FormStepper(props: FormStepperProps): JSX.Element {
   const { steps, onComplete } = props;
+
   const currentStep = useCurrentStep();
   const animation = useFormStore((state) => state.animation);
 
   const currentStepConfig = steps[currentStep];
-  console.log({ animation });
+
   return (
     <div className="relative w-full min-h-[70vh]">
       <StepIndicator steps={steps} />
