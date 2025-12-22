@@ -120,17 +120,16 @@ function DynamicField(props: DynamicFieldProps): JSX.Element | null {
         const fileField = field as FileFieldConfig
 
         return (
-          <div >
-            <label className="text-foreground text-small pb-2">{field.label}</label>
-            <div>
+          <div>
+            <label className="text-foreground text-small">{field.label}</label>
+            <div className='mt-2'>
               <FileImageUploader
                 name={field.name}
-                files={commonProps.value}
                 setFiles={(fileItems) => {
-                  const fileItem = fileItems.map((fileItem) => fileItem.source);
-
-                  field?.handleChange && field.handleChange(fileItem, formData);
-                  handleChange(field.name, fileItem.length ? [{ source: fileItem[0] }] : []);
+                  const fileItem = fileItems.map((fileItem) => fileItem?.source || fileItem.serverId);
+                }}
+                onprocessfile={(error, fileItem) => {
+                  handleChange(field.name, [...value, { source: fileItem.serverId }]);
                 }}
                 disabled={field.disabled}
                 acceptedFileTypes={fileField.accept}

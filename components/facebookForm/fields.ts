@@ -7,7 +7,7 @@ export const FIELD_LIST: StepConfig[] = [
     id: "aditional-info",
     title: "Información de adicional",
     description:
-      "Completa la información de tu nueva integración antes de empezar a utilizarla",
+      "Completa la información de tu nueva integración antes de empezar a utilizarla ",
     layout: "grid",
     fields: [
       {
@@ -28,7 +28,7 @@ export const FIELD_LIST: StepConfig[] = [
         type: FieldType.FILE,
         accept: ["image/*"],
         validations: [validators.required],
-        className: "w-full min-h-[200]",
+        className: "flex flex-col w-full h-full min-h-[82]",
       },
     ],
   },

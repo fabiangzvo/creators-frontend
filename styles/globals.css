@@ -3,17 +3,21 @@
 @layer components {
   /* Contenedor principal de FilePond */
   .filepond--root {
-    @apply font-sans;
+    @apply font-sans h-full!;
+  }
+
+  .filepond--panel * {
+    @apply dark:bg-foreground/10! border-none!;
   }
 
   /* Panel de fondo */
-  .filepond--panel-root {
-    @apply bg-primary-100/40! dark:bg-primary-50/30! border-2 border-dashed border-primary-500 rounded-lg;
+  .filepond--panel:where(.filepond--panel-root) {
+    @apply outline-3 outline-dashed outline-primary-500 rounded-lg hover:bg-primary-50!;
   }
 
   /* Área de drop */
   .filepond--drop-label {
-    @apply text-gray-700 h-full! bg-primary-50! border-2 border-dashed border-primary-500 rounded-lg;
+    @apply h-full! rounded-lg transition-colors duration-200 hover:cursor-pointer hover:bg-primary-50!;
   }
 
   /* Contenedor del contenido de subida */
@@ -28,17 +32,17 @@
 
   /* Texto principal */
   .upload-text {
-    @apply block text-sm font-medium text-gray-700;
+    @apply block text-sm font-medium;
   }
 
   /* Subtítulo con info de formato */
   .upload-subtitle {
-    @apply block text-xs text-gray-500 mt-1;
+    @apply block text-xs mt-1;
   }
 
   /* Hover state */
   .filepond--panel-root:hover {
-    @apply border-primary-400 [background-color:none];
+    @apply border-none! [background-color:none];
   }
 
   /* Estado cuando se arrastra un archivo encima */
@@ -68,6 +72,27 @@
   /* Progress bar */
   .filepond--file-status {
     @apply text-sm text-gray-600;
+  }
+
+  .filepond--panel-bottom:before,
+  .filepond--panel-top:after {
+    @apply h-0!;
+  }
+
+  .filepond--image-preview {
+    @apply bg-primary-500!;
+  }
+
+  .filepond--image-preview-overlay-idle {
+    @apply text-black/20!;
+  }
+
+  .filepond--file-info {
+    @apply hidden!;
+  }
+
+  .filepond--wrapper {
+    @apply min-h-[100]!;
   }
 }
 

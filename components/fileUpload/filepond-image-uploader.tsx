@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { FilePond, FilePondProps, registerPlugin } from "react-filepond";
-import { FilePondErrorDescription, FilePondFile } from "filepond";
+import { FilePondErrorDescription, FilePondFile, FilePondServerConfigProps } from "filepond";
 
 import "filepond/dist/filepond.min.css";
 
@@ -25,17 +25,21 @@ registerPlugin(
 
 export interface FileImageUploaderProps extends FilePondProps {
   setFiles: (files: FilePondFile[]) => void;
+  label?: string;
+  description?: string;
 }
 
 export default function FileImageUploader(props: FileImageUploaderProps) {
   const {
     onremovefile,
     setFiles,
-    files,
     name = '_image',
+    label = "Haga clic o arrastre para subir",
+    description,
     ...componentProps
   } = props
 
+  const [files, setLocalFiles] = useState<FilePondServerConfigProps["files"]>([]);
   const fileRef = useRef(null);
 
   const onRemoveCoverImages = useCallback((
@@ -61,15 +65,17 @@ export default function FileImageUploader(props: FileImageUploaderProps) {
   return (
     <div className="w-full h-full">
       <FilePond
-        labelIdle='<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 32px 0;">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+        labelIdle={`<div class="flex flex-col items-center gap-2 px-8 hover:cursor-pointer my-4">
+        <div class="flex justify-center items-center bg-background rounded-full w-12 h-12">
+        <svg class="text-primary-500!" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1"/>
           <polyline points="9 15 12 12 15 15"/>
           <line x1="12" y1="12" x2="12" y2="21"/>
         </svg>
-        <span style="font-size: 14px; font-weight: 500; color: #374151;">Haga clic o arrastre para subir</span>
-        <span style="font-size: 12px; color: #9ca3af;">SVG, PNG, JPG (máx. 800×400px)</span>
-      </div>'
+        </div>
+        <span class="text-xl font-bold text-foreground">${label}</span>
+        ${description ? '<span class="text-sm font-medium text-foreground/40">' + description + '</span>' : ''}
+      </div>`}
         credits={false}
         allowImagePreview
         maxFileSize="20MB"
@@ -82,9 +88,14 @@ export default function FileImageUploader(props: FileImageUploaderProps) {
         ref={fileRef}
         files={files}
         name={name}
-        onupdatefiles={setFiles}
+        onupdatefiles={(files) => { setLocalFiles(files as any); setFiles(files as any) }}
         onremovefile={onRemoveCoverImages}
         instantUpload={false}
+        allowImageResize
+        imageResizeTargetWidth={200}
+        imageResizeTargetHeight={200}
+        imageResizeMode="cover"
+        imageResizeUpscale
         {...componentProps}
       />
     </div>
