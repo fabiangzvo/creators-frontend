@@ -4,19 +4,31 @@ import { del, head, put } from "@vercel/blob";
 export async function POST(request: Request): Promise<NextResponse> {
   const body = await request.formData();
 
-  const file = body.get("image") as File;
+  const entries = body.getAll("image");
+
+  const file = entries.find((v) => v instanceof File);
+  const metadata = entries.find((v) => typeof v === "string");
+
+  if (!(file instanceof File)) {
+    return new NextResponse("Is not a file", { status: 400 });
+  }
+
+  if (metadata) {
+    const imageData = JSON.parse(metadata.toString());
+    console.log("Metadata FilePond:", imageData);
+  }
 
   const { url } = await put(`media/${file.name}`, file, {
     access: "public",
     allowOverwrite: true,
-    addRandomSuffix:true
+    addRandomSuffix: true,
   });
 
-  const response = new NextResponse(url);
-
-  response.headers.set("Content-Type", "text/plain");
-
-  return response;
+  return new NextResponse(url, {
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
 }
 
 export async function GET(request: NextRequest): Promise<NextResponse> {

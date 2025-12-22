@@ -4,12 +4,11 @@ import { JSX, useCallback, useMemo } from 'react';
 
 import { FormStepper } from '@/components/formStepper'
 import { validators } from '@/components/formStepper/validators';
-import { FieldType, FormDataType } from '@/components/formStepper/types';
+import { FieldType } from '@/components/formStepper/types';
 import { useFormStore } from '@/lib/store/form';
 
 import { FormProps } from './types';
 import { FIELD_LIST } from '../../fields';
-import axios from 'axios';
 
 function Form(props: FormProps): JSX.Element {
   const { pages } = props;
@@ -42,10 +41,10 @@ function Form(props: FormProps): JSX.Element {
               const selectedPage = value.map((id) => pages.find(page => page.value === id));
 
               if (selectedPage[0]) {
-                console.log(selectedPage[0].image)
-                setFieldValue("name", selectedPage[0].title || "");
 
+                setFieldValue("name", selectedPage[0].title || "");
                 setFieldValue("image", [{ source: selectedPage[0].image }]);
+                setFieldValue("pageInfo", selectedPage[0]);
               }
             }
           },

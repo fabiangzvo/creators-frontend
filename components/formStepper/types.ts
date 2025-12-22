@@ -75,6 +75,7 @@ export interface CheckboxFieldConfig extends BaseFieldConfig {
 export interface FileFieldConfig extends BaseFieldConfig {
   type: FieldType.FILE;
   accept?: string[];
+  isMultiple?: boolean;
 }
 
 export interface ListFieldConfig extends BaseFieldConfig {

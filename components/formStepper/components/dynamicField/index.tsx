@@ -125,11 +125,11 @@ function DynamicField(props: DynamicFieldProps): JSX.Element | null {
             <div className='mt-2'>
               <FileImageUploader
                 name={field.name}
-                setFiles={(fileItems) => {
-                  const fileItem = fileItems.map((fileItem) => fileItem?.source || fileItem.serverId);
-                }}
+                defaultFiles={value}
                 onprocessfile={(error, fileItem) => {
-                  handleChange(field.name, [...value, { source: fileItem.serverId }]);
+                  if (error) return
+
+                  handleChange(field.name, [{ source: fileItem.serverId }]);
                 }}
                 disabled={field.disabled}
                 acceptedFileTypes={fileField.accept}
