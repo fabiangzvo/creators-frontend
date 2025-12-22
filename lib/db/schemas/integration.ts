@@ -20,6 +20,7 @@ export const integration = pgTable("integration", {
   softRemoved: boolean("soft_removed").default(false),
   settings: jsonb("settings"),
   image: text("image"),
+  token: text("token").notNull().default(""),
   providerId: uuid("provider_id")
     .notNull()
     .references(() => provider.id, { onDelete: "cascade" }),

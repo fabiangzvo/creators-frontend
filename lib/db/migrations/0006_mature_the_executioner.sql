@@ -1,0 +1,1 @@
+ALTER TABLE "integration" ADD COLUMN "token" text DEFAULT '' NOT NULL;
