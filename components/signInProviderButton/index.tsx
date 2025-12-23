@@ -14,7 +14,15 @@ import { PROVIDER_ICONS } from "./constants";
 export function SignInProviderButton(props: SignInProviderButtonProps): JSX.Element {
   const { name, provider, icon } = props;
 
-  const handleClick = useCallback(async () => await authClient.signIn.social({ provider, callbackURL: `/channels/create/${provider}`, }),
+  const handleClick = useCallback(async () => {
+    switch (provider) {
+      case "instagram":
+        await authClient.signIn.oauth2({ providerId: provider })
+        break;
+      default:
+        await authClient.signIn.social({ provider, callbackURL: `/channels/create/${provider}` })
+    }
+  },
     [name, provider])
 
   const backgroundIcon = useMemo(() => {

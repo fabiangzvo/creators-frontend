@@ -45,6 +45,7 @@
     "@vercel/blob": "^2.0.0",
     "axios": "^1.13.2",
     "better-auth": "^1.3.34",
+    "better-auth-instagram": "^0.0.7",
     "card": "^2.5.4",
     "clsx": "2.1.1",
     "drizzle-kit": "^0.31.6",
