@@ -56,9 +56,6 @@ export default function StepContent(props: StepContentProps): JSX.Element {
       <CardBody>
         {component}
       </CardBody>
-      <CardFooter className="flex justify-between">
-        <StepFooter onComplete={onComplete} />
-      </CardFooter>
     </Card>
   );
 }

@@ -13,4 +13,15 @@ export interface Integration {
   provider: Provider;
   createdAt: string;
   updatedAt: string;
+  image: string;
+  token: string;
+}
+
+export interface IntegrationBody {
+  name: string;
+  accountId: string;
+  providerId: string;
+  userId: string;
+  image: string;
+  token: string;
 }

@@ -40,7 +40,7 @@ export default function StepFooter(props: StepFooterProps): JSX.Element {
         isDisabled={isSubmitting}
         isLoading={isSubmitting}
         className="font-semibold"
-        endContent={isLastStep ? <Check /> : <ChevronRight />}
+        endContent={!isLastStep && <ChevronRight />}
       >
         {isLastStep ? 'Finalizar' : 'Siguiente'}
       </Button></Fragment>

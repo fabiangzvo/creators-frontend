@@ -11,7 +11,7 @@ import { ChannelCardProps } from './types'
 import { statusVariants, StatusVariants } from './variants'
 
 function ChannelCard(props: ChannelCardProps): JSX.Element {
-  const { id, name, status, provider, accountId, apiKey, refresh } = props;
+  const { id, name, status, provider, accountId, apiKey, refresh, image } = props;
 
   return (
     <Card className="max-w-[400px]" >
@@ -22,7 +22,7 @@ function ChannelCard(props: ChannelCardProps): JSX.Element {
             height={50}
             width={50}
             radius="sm"
-            src={`https://avatars.githubusercontent.com/u/${Math.floor(Math.random() * 1000)}?s=100`}
+            src={image || `https://avatars.githubusercontent.com/u/${Math.floor(Math.random() * 1000)}?s=100`}
           />
           <div className="flex flex-col gap-1">
             <p className="text-md line-clamp-1">{name}</p>

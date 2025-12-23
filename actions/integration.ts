@@ -1,6 +1,7 @@
 "use server";
 
 import { apiIntegration } from "@/lib/axios";
+import { IntegrationBody } from "@/types/integrations";
 
 export async function deleteIntegration(
   integrationId: string
@@ -29,5 +30,15 @@ export async function changeStatus(integrationId: string): Promise<boolean> {
     console.error(e);
 
     return false;
+  }
+}
+
+export async function createIntegration(data: IntegrationBody): Promise<any> {
+  try {
+    const response = await apiIntegration.post("/integrations", data);
+
+    return response.data;
+  } catch (e) {
+    return { status: false, data: null };
   }
 }
