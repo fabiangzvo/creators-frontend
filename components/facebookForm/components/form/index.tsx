@@ -11,7 +11,7 @@ import { FormProps } from './types';
 import { FIELD_LIST } from '../../fields';
 
 function Form(props: FormProps): JSX.Element {
-  const { pages } = props;
+  const { pages, token } = props;
 
   const initializeStore = useFormStore((state) => state.initializeStore);
   const setFieldValue = useFormStore((state) => state.setFormData);
@@ -53,9 +53,10 @@ function Form(props: FormProps): JSX.Element {
     }
 
     initializeStore(steps);
+    setFieldValue("token", token);
 
     return steps;
-  }, [pages, initializeStore, setFieldValue]);
+  }, [pages, initializeStore, setFieldValue, token]);
 
   return (
     <FormStepper steps={steps} onComplete={handleSubmit} />

@@ -1,3 +1,8 @@
+export interface FacebookCategory {
+  id: string;
+  name: string;
+}
+
 export interface FacebookPageInfo {
   about: string;
   name: string;
@@ -11,4 +16,6 @@ export interface FacebookPageInfo {
     };
   };
   id: string;
+  followers_count: number;
+  category_list: FacebookCategory[];
 }

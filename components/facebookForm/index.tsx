@@ -26,6 +26,7 @@ async function FacebookForm(): Promise<JSX.Element> {
   return (
     <div className="px-4">
       <Form
+        token={session.accessToken}
         pages={data
           .map(page => ({
             value: page.id,
