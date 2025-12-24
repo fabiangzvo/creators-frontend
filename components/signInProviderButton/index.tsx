@@ -17,7 +17,7 @@ export function SignInProviderButton(props: SignInProviderButtonProps): JSX.Elem
   const handleClick = useCallback(async () => {
     switch (provider) {
       case "instagram":
-        await authClient.signIn.oauth2({ providerId: provider })
+        await authClient.signIn.oauth2({ providerId: provider, callbackURL: `/channels/create/${provider}` })
         break;
       default:
         await authClient.signIn.social({ provider, callbackURL: `/channels/create/${provider}` })

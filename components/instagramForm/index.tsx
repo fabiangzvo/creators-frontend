@@ -1,15 +1,38 @@
-"use client"
-
 import { JSX } from 'react'
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-import { authClient } from '@/lib/auth-client'
+import { auth } from '@/lib/auth'
+import { getAccountInfo } from '@/actions/instagram'
 
-function InstagramForm(): JSX.Element {
-  const { data } = authClient.useSession()
+import Form from './components/form'
+
+async function InstagramForm(): Promise<JSX.Element> {
+  const session = await auth.api.getAccessToken({
+    headers: await headers(),
+    body: {
+      providerId: "instagram"
+    },
+  })
+
+  if (!session?.accessToken) return redirect("/channels/create")
+
+  const data = await getAccountInfo(session.accessToken)
+
+  if (!data) return <div>No tienes una cuenta enlazada</div>
+
   return (
-    <div className="container">InstagramForm
-      <p>{JSON.stringify(data)}</p>
-      <p>{JSON.stringify(authClient.listSessions())}</p>
+    <div className="px-4">
+      <Form
+        token={session.accessToken}
+        pages={[data]
+          .map(page => ({
+            value: page.id,
+            title: page.username,
+            image: page.profile_picture_url
+          }))
+        }
+      />
     </div>
   )
 }
