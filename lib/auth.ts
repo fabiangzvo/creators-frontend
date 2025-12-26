@@ -30,6 +30,12 @@ export const auth = betterAuth({
       clientSecret: process.env.TIKTOK_SECRET ?? "",
       clientKey: process.env.TIKTOK_CLIENT_ID ?? "",
       enabled: true,
+      scope: [
+        "user.info.basic",
+        "video.upload",
+        "user.info.profile",
+        "user.info.stats",
+      ],
     },
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
