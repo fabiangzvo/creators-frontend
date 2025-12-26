@@ -19,6 +19,9 @@ export function SignInProviderButton(props: SignInProviderButtonProps): JSX.Elem
       case "instagram":
         await authClient.signIn.oauth2({ providerId: provider, callbackURL: `/channels/create/${provider}` })
         break;
+      case "youtube":
+        await authClient.signIn.social({ provider: "google", callbackURL: `/channels/create/${provider}` })
+        break
       default:
         await authClient.signIn.social({ provider, callbackURL: `/channels/create/${provider}` })
     }

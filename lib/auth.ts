@@ -16,8 +16,8 @@ export const auth = betterAuth({
   socialProviders: {
     facebook: {
       enabled: true,
-      clientId: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID ?? "",
-      clientSecret: process.env.NEXT_PUBLIC_FACEBOOK_SECRET ?? "",
+      clientId: process.env.FACEBOOK_CLIENT_ID ?? "",
+      clientSecret: process.env.FACEBOOK_SECRET ?? "",
       scope: [
         "public_profile",
         "pages_manage_posts",
@@ -27,9 +27,25 @@ export const auth = betterAuth({
       ],
     },
     tiktok: {
-      clientSecret: process.env.NEXT_PUBLIC_TIKTOK_SECRET ?? "",
-      clientKey: process.env.NEXT_PUBLIC_TIKTOK_CLIENT_ID ?? "",
+      clientSecret: process.env.TIKTOK_SECRET ?? "",
+      clientKey: process.env.TIKTOK_CLIENT_ID ?? "",
       enabled: true,
+    },
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_SECRET ?? "",
+      enabled: true,
+      accessType: "offline",
+      prompt: "consent",
+      scope: [
+        "openid",
+        "email",
+        "profile",
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube.readonly",
+        "https://www.googleapis.com/auth/youtube.force-ssl",
+        "https://www.googleapis.com/auth/yt-analytics.readonly",
+      ],
     },
   },
 });
