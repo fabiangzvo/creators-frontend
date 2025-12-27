@@ -1,10 +1,14 @@
 import { ComponentType } from "react";
-import { ValidationFunction } from "./validators";
 import { SelectionMode } from "@react-types/shared";
+
+import { Providers } from "@/types/providers";
+
+import { ValidationFunction } from "./validators";
 
 export interface FormStepperProps {
   steps: StepConfig[];
   onComplete: (data: FormDataType) => Promise<void>;
+  provider: Providers;
 }
 
 // ==================== FIELD TYPES ====================
@@ -106,6 +110,7 @@ export enum LayoutEnum {
 export type LayoutType = `${LayoutEnum}`;
 
 export interface StepComponentProps {
+  provider: Providers;
   formData: FormDataType;
   errors: FormErrors;
   handleChange: (fieldName: string, value: any) => void;

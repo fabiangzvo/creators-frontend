@@ -6,11 +6,10 @@ import { useFormData, useFormErrors, useFormStore } from '@/lib/store/form';
 
 import { StepContentProps } from './types';
 import { LayoutEnum } from '../../types';
-import StepFooter from '../stepFooter';
 import DynamicField from '../dynamicField';
 
 export default function StepContent(props: StepContentProps): JSX.Element {
-  const { stepConfig, onComplete } = props;
+  const { stepConfig, provider } = props;
 
   const formData = useFormData();
   const errors = useFormErrors();
@@ -26,6 +25,7 @@ export default function StepContent(props: StepContentProps): JSX.Element {
         errors={errors}
         handleChange={handleChange}
         handleBlur={handleBlur}
+        provider={provider}
       />
 
     const fields = stepConfig?.fields?.map((field) => <DynamicField key={field.name} field={field} />)
@@ -39,7 +39,7 @@ export default function StepContent(props: StepContentProps): JSX.Element {
         {fields}
       </div >
     )
-  }, [stepConfig, formData, errors, handleChange, handleBlur])
+  }, [stepConfig, formData, errors, handleChange, handleBlur, provider])
 
   return (
     <Card

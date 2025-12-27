@@ -1,6 +1,7 @@
 import { ComponentType, FunctionComponent } from "react";
 
 import { IconProps } from "@/components/icons/types";
+import { ListOption } from "@/components/formStepper/types";
 
 export type Providers = "facebook" | "instagram" | "youtube" | "tiktok";
 
@@ -16,3 +17,15 @@ export type ProvidersComponentMap<T = any> = Record<
   Providers,
   FunctionComponent<T>
 >;
+
+export type FetchAllowedAccountsFunc = (
+  accessToken: string
+) => Promise<string | ListOption[]>;
+
+export interface FormProviderProps {
+  accessToken: string;
+  provider: Providers;
+  fetchAllowedAccounts: FetchAllowedAccountsFunc;
+}
+
+export type ProvidersWithFetch = Record<Providers, FetchAllowedAccountsFunc>;

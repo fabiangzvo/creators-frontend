@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { FacebookPageInfo } from "@/types/facebook";
+import { ListOption } from "@/components/formStepper/types";
 
 export async function getPages(
   access_token: string
@@ -26,4 +27,20 @@ export async function getPages(
 
     return [];
   }
+}
+
+export async function getFacebookAccountInfo(
+  accessToken: string
+): Promise<string | ListOption[]> {
+  const data = await getPages(accessToken);
+
+  if (!data || data.length === 0) return "No tienes páginas disponibles";
+
+  return (
+    data.map((page) => ({
+      title: page.name,
+      value: page.id,
+      image: page.picture.data.url,
+    })) || []
+  );
 }

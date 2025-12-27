@@ -1,32 +1,23 @@
 "use server"
 
 import { JSX } from 'react'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
 
-import { auth } from '@/lib/auth'
 import { getPages } from '@/actions/facebook'
+import { FormProviderProps } from '@/types/providers'
 
 import Form from './components/form'
 
-async function FacebookForm(): Promise<JSX.Element> {
-  const session = await auth.api.getAccessToken({
-    headers: await headers(),
-    body: {
-      providerId: "facebook"
-    },
-  })
+async function FacebookForm(props: FormProviderProps): Promise<JSX.Element> {
+  const { accessToken } = props
 
-  if (!session?.accessToken) return redirect("/channels/create")
-
-  const data = await getPages(session.accessToken)
+  const data = await getPages(accessToken)
 
   if (!data || data.length === 0) return <div>No tienes páginas disponibles</div>
 
   return (
     <div className="px-4">
       <Form
-        token={session.accessToken}
+        token={accessToken}
         pages={data
           .map(page => ({
             value: page.id,

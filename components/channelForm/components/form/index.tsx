@@ -13,6 +13,7 @@ import { FormDataType } from '@/types/form';
 
 import { FormProps } from './types';
 import { FIELD_LIST } from '../../fields';
+import { getProviderByName } from '@/lib/db/queries/provider';
 
 interface FormData {
   name: string;
@@ -23,7 +24,7 @@ interface FormData {
 }
 
 function Form(props: FormProps): JSX.Element {
-  const { pages, token } = props;
+  const { pages, token, provider } = props;
   const { useSession } = authClient
 
   const { data: session } = useSession()
@@ -34,11 +35,24 @@ function Form(props: FormProps): JSX.Element {
   const handleSubmit = useCallback(async (form: FormDataType) => {
     const data = form as FormData
 
+    const providerData = await getProviderByName(provider)
+
+    if (!providerData) {
+      addToast({
+        variant: "flat",
+        title: "Proveedor desconocido",
+        description: "Ops! al parecer no soportamos el proveedor seleccionado.",
+        color: "warning",
+      });
+
+      return;
+    }
+
     console.log(data);
     const body: IntegrationBody = {
       name: data.name,
       accountId: data.pageInfo.value,
-      providerId: "24997ad2-e835-4899-a1a0-8bc74e10f748",
+      providerId: providerData.id,
       userId: session?.user?.id!,
       image: data.image[0].source,
       token: data.token,
@@ -59,15 +73,19 @@ function Form(props: FormProps): JSX.Element {
 
   useEffect(() => {
     initializeStore(FIELD_LIST);
-    setFieldValue("token", token);
-    setFieldValue("name", pages[0].title || "");
-    setFieldValue("pageInfo", pages[0]);
-    setFieldValue("image", [{ source: pages[0].image }]);
 
+    setFieldValue("token", token);
+    const [page] = pages
+
+    if (page) {
+      setFieldValue("name", page.title || "");
+      setFieldValue("pageInfo", page);
+      setFieldValue("image", [{ source: page.image }]);
+    }
   }, [pages, initializeStore, setFieldValue, token]);
 
   return (
-    <FormStepper steps={FIELD_LIST} onComplete={handleSubmit} />
+    <FormStepper steps={FIELD_LIST} onComplete={handleSubmit} provider={provider} />
   )
 }
 

@@ -61,7 +61,7 @@ function Form(props: FormProps): JSX.Element {
   const steps = useMemo(() => {
     const steps = [...FIELD_LIST]
 
-    if (pages.length > 0) {
+    if (pages?.length > 1) {
       steps.unshift({
         id: "selectPage",
         title: "Seleccionar página",
@@ -97,7 +97,7 @@ function Form(props: FormProps): JSX.Element {
   }, [pages, initializeStore, setFieldValue, token]);
 
   return (
-    <FormStepper steps={steps} onComplete={handleSubmit} />
+    <FormStepper steps={steps} onComplete={handleSubmit} provider="facebook" />
   )
 }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { InstagramPageInfo } from "@/types/instagram";
+import { ListOption } from "@/components/formStepper/types";
 
 export async function getAccountInfo(
   access_token: string
@@ -23,4 +24,10 @@ export async function getAccountInfo(
 
     return {} as InstagramPageInfo;
   }
+}
+
+export async function getInstagramAccount(
+  accessToken: string
+): Promise<string | ListOption[]> {
+  return [];
 }

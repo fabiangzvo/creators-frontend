@@ -10,7 +10,7 @@ import { getAccountInfo } from '@/actions/instagram';
 import ChannelCard from '../../../facebookForm/components/channelCard';
 
 function ConfirmationStep(props: StepComponentProps): JSX.Element {
-  const { formData } = props;
+  const { formData, provider } = props;
 
   const { data, error, isLoading } = useSWR(
     formData.token,

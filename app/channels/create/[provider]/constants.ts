@@ -1,12 +1,11 @@
-import { ProvidersComponentMap } from "@/types/providers";
-import FacebookForm from "@/components/facebookForm";
-import InstagramForm from "@/components/instagramForm";
-import YoutubeForm from "@/components/youtubeForm";
-import TiktokForm from "@/components/tiktokForm";
+import { ProvidersWithFetch } from "@/types/providers";
+import { getFacebookAccountInfo } from "@/actions/facebook";
+import { getInstagramAccount } from "@/actions/instagram";
+import { getTiktokAccountInfo } from "@/actions/tiktok";
 
-export const PROVIDERS_FORM: ProvidersComponentMap = {
-  facebook: FacebookForm,
-  instagram: InstagramForm,
-  youtube: YoutubeForm,
-  tiktok: TiktokForm,
+export const PROVIDERS_FORM: ProvidersWithFetch = {
+  facebook: getFacebookAccountInfo,
+  instagram: getInstagramAccount,
+  youtube: (token: string) => Promise.resolve([]),
+  tiktok: getTiktokAccountInfo,
 };

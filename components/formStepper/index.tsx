@@ -13,7 +13,7 @@ import { constants } from './constants';
 import StepFooter from './components/stepFooter';
 
 export function FormStepper(props: FormStepperProps): JSX.Element {
-  const { steps, onComplete } = props;
+  const { steps, onComplete, provider } = props;
 
   const currentStep = useCurrentStep();
   const animation = useFormStore((state) => state.animation);
@@ -29,7 +29,7 @@ export function FormStepper(props: FormStepperProps): JSX.Element {
         transition={{ duration: 0.2 }}
         {...constants[animation]}
       >
-        <StepContent stepConfig={currentStepConfig} onComplete={onComplete} />
+        <StepContent stepConfig={currentStepConfig} onComplete={onComplete} provider={provider} />
         <div className='w-full flex justify-between bottom-0 bg-background z-10 py-3'>
           <StepFooter onComplete={onComplete} />
         </div>
