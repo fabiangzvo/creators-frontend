@@ -6,15 +6,16 @@ import { Alert } from "@heroui/alert";
 import useSWR from 'swr';
 
 import { type StepComponentProps } from '@/components/formStepper/types';
-import { getAccountInfo } from '@/actions/instagram';
-import ChannelCard from '../../../facebookForm/components/channelCard';
+import ChannelCard from '@/components/facebookForm/components/channelCard';
+
+import { PROVIDER_ACCOUNT_LIST } from './constants';
 
 function ConfirmationStep(props: StepComponentProps): JSX.Element {
   const { formData, provider } = props;
 
   const { data, error, isLoading } = useSWR(
     formData.token,
-    (token: string) => getAccountInfo(token)
+    (token: string) => PROVIDER_ACCOUNT_LIST[provider](token)
   );
 
   if (isLoading) {
@@ -34,19 +35,19 @@ function ConfirmationStep(props: StepComponentProps): JSX.Element {
       />
       <div className='flex gap-5 w-full items-center justify-center max-md:flex-col'>
         <ChannelCard
-          description={data?.biography}
+          description={data?.description}
           optionsComponent={
             <Tooltip content="Seguidores">
               <div className='flex gap-2 items-center text-primary-500'>
-                <p>{data?.followers_count || 'no hay seguidores'}</p>
+                <p>{data?.optionsComponent || 'no cuentas con seguidores'}</p>
                 <Users className='text-primary-500' />
               </div>
             </Tooltip>
           }
-          image={data?.profile_picture_url || ''}
-          pageLink={"https://www.instagram.com/" + (data?.username || '')}
-          subtitle="Instagram"
-          title={data?.username || ''}
+          image={data?.image || ''}
+          pageLink={data?.pageLink}
+          subtitle={provider}
+          title={data?.title || ''}
         />
         <div className='flex justify-center w-1/6 max-md:rotate-90'>
           <ArrowBigRight className='text-primary-500 fill-primary-500 w-14 h-14' />
@@ -54,7 +55,7 @@ function ConfirmationStep(props: StepComponentProps): JSX.Element {
         <ChannelCard
           optionsComponent={<Chip variant='flat' color='success'>Activo</Chip>}
           image={formData.image[0].source}
-          subtitle="Instagram"
+          subtitle={provider}
           title={formData.name}
         />
       </div>

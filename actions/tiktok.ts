@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { TiktokAccountInfo } from "@/types/tiktok";
 import { ListOption } from "@/components/formStepper/types";
+import { ChannelCardProps } from "@/components/facebookForm/components/channelCard/types";
 
 export async function getAccountInfo(
   accessToken: string
@@ -44,4 +45,22 @@ export async function getTiktokAccountInfo(
       value: data.user.open_id,
     },
   ];
+}
+
+export async function getTiktokChannelProps(
+  accessToken: string
+): Promise<ChannelCardProps> {
+  const data = await getAccountInfo(accessToken);
+
+  if (!data || !data?.user?.open_id)
+    throw new Error("No se pudo obtener la información de TikTok");
+
+  return {
+    image: data.user.avatar_url,
+    title: data.user.username,
+    subtitle: "Instagram",
+    description: data.user.bio_description,
+    pageLink: `https://www.tiktok.com/@${data.user.username}`,
+    optionsComponent: `${data.user.follower_count} seguidor(es)`,
+  };
 }

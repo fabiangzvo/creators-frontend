@@ -1,46 +1,43 @@
-import axios from "axios";
-
-import { TiktokAccountInfo } from "@/types/tiktok";
-import { ListOption } from "@/components/formStepper/types";
-
-export async function getAccountInfo(
-  accessToken: string
-): Promise<TiktokAccountInfo> {
-  try {
-    const response = await axios.get<{ data: TiktokAccountInfo }>(
-      "https://www.googleapis.com/youtube/v3/channels",
-      {
-        params: {
-          part: "snippet,statistics,brandingSettings",
-        },
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    return response.data.data as TiktokAccountInfo;
-  } catch (e) {
-    console.error(e);
-
-    return {} as TiktokAccountInfo;
-  }
+export interface YouTubeChannelInfo {
+  kind: string;
+  etag: string;
+  items: YouTubeChannel[];
 }
 
-export async function getYoutubeAccountInfo(
-  accessToken: string
-): Promise<string | ListOption[]> {
-  const data = await getAccountInfo(accessToken);
+export interface YouTubeChannel {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: {
+    title: string;
+    description: string;
+    thumbnails: YouTubeThumbnails;
+    customUrl?: string;
+    publishedAt: string;
+    country?: string;
+  };
+  statistics: {
+    viewCount: string;
+    subscriberCount: string;
+    hiddenSubscriberCount: boolean;
+    videoCount: string;
+  };
+  topicDetails?: {
+    topicIds?: string[];
+    topicCategories?: string[];
+  };
+}
 
-  if (!data || !data?.user)
-    return "No nos diste los permisos necesarios para obtener la información desde tiktok";
+export interface YouTubeThumbnails {
+  default?: YouTubeThumbnail;
+  medium?: YouTubeThumbnail;
+  high?: YouTubeThumbnail;
+  standard?: YouTubeThumbnail;
+  maxres?: YouTubeThumbnail;
+}
 
-  return [
-    {
-      image: data.user.avatar_url,
-      title: data.user.username,
-      value: data.user.open_id,
-    },
-  ];
+export interface YouTubeThumbnail {
+  url: string;
+  width?: number;
+  height?: number;
 }

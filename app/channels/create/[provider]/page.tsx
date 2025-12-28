@@ -6,7 +6,7 @@ import { auth } from '@/lib/auth'
 import Form from "@/components/channelForm";
 
 import { ChannelProps } from "./types";
-import { PROVIDERS_FORM } from "./constants";
+import { PROVIDER_ACCOUNT_LIST } from "./constants";
 
 async function Channels({ params }: ChannelProps): Promise<JSX.Element> {
   const { provider } = await params;
@@ -20,9 +20,15 @@ async function Channels({ params }: ChannelProps): Promise<JSX.Element> {
 
   if (!session?.accessToken) return redirect("/channels/create")
 
-  return (<div className="container mt-2">
-    <Form provider={provider} accessToken={session.accessToken} fetchAllowedAccounts={PROVIDERS_FORM[provider]} />
-  </div>);
+  return (
+    <div className="container mt-2">
+      <Form
+        provider={provider}
+        accessToken={session.accessToken}
+        fetchAllowedAccounts={PROVIDER_ACCOUNT_LIST[provider]}
+      />
+    </div>
+  );
 }
 
 export default Channels;

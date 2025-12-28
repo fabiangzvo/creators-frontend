@@ -2,6 +2,8 @@ import axios from "axios";
 
 import { FacebookPageInfo } from "@/types/facebook";
 import { ListOption } from "@/components/formStepper/types";
+import { ProvidersWithDetailFetchFunc } from "@/types/providers";
+import { ChannelCardProps } from "@/components/facebookForm/components/channelCard/types";
 
 export async function getPages(
   access_token: string
@@ -43,4 +45,24 @@ export async function getFacebookAccountInfo(
       image: page.picture.data.url,
     })) || []
   );
+}
+
+export async function getFacebookChannelProps(
+  accessToken: string
+): Promise<ChannelCardProps> {
+  const data = await getPages(accessToken);
+
+  if (!data || data.length === 0)
+    throw new Error("No tienes páginas disponibles");
+
+  const [page] = data;
+
+  return {
+    image: page.picture.data.url,
+    title: page.name,
+    subtitle: page.category_list?.[0]?.name || "Página de Facebook",
+    description: page?.about || "Sin descripción",
+    pageLink: `https://www.facebook.com/${page.id}`,
+    optionsComponent: `${page.followers_count} seguidor(es)`,
+  };
 }
