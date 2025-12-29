@@ -5,9 +5,10 @@ import { Link } from '@heroui/link';
 import { Button } from '@heroui/button';
 
 import { ChannelCardProps } from './types';
+import { avatarVariants, buttonVariants } from "./variants";
 
 function ChannelCard(props: ChannelCardProps): JSX.Element {
-  const { image, description, optionsComponent, pageLink, subtitle, title } = props
+  const { image, description, optionsComponent, pageLink, subtitle, title, provider } = props
 
   return (
     <Card shadow='sm' className='cursor-default w-3/6 max-md:w-5/6 h-full'>
@@ -18,6 +19,7 @@ function ChannelCard(props: ChannelCardProps): JSX.Element {
             radius="full"
             size="md"
             src={image}
+            className={avatarVariants({ variant: provider })}
           />
           <div className='flex flex-col'>
             <h2 className='text-lg'>{title}</h2>
@@ -32,13 +34,13 @@ function ChannelCard(props: ChannelCardProps): JSX.Element {
       {pageLink && <CardFooter className='relative flex gap-2'>
         <Button
           as={Link}
-          className='w-full'
+          className='w-full font-bold'
           variant='solid'
           color='primary'
           href={pageLink}
           target='_blank'
         >
-          Ver página
+          {buttonVariants({ label: provider })}
         </Button>
       </CardFooter>}
     </Card>

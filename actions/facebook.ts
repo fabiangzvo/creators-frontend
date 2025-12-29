@@ -63,6 +63,7 @@ export async function getFacebookChannelProps(
     subtitle: page.category_list?.[0]?.name || "Página de Facebook",
     description: page?.about || "Sin descripción",
     pageLink: `https://www.facebook.com/${page.id}`,
-    optionsComponent: `${page.followers_count} seguidor(es)`,
+    optionsComponent: page.followers_count,
+    provider: "facebook",
   };
 }

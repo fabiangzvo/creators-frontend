@@ -61,6 +61,7 @@ export async function getTiktokChannelProps(
     subtitle: "Instagram",
     description: data.user.bio_description,
     pageLink: `https://www.tiktok.com/@${data.user.username}`,
-    optionsComponent: `${data.user.follower_count} seguidor(es)`,
+    optionsComponent: data.user.follower_count,
+    provider: "tiktok",
   };
 }

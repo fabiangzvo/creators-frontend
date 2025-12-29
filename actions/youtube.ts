@@ -63,6 +63,7 @@ export async function getYoutubeChannelProps(
     subtitle: "YouTube",
     description: data.items[0].snippet.description || "Sin descripción",
     pageLink: `https://www.youtube.com/channel/${data.items[0].id}`,
-    optionsComponent: `${data.items[0].statistics.subscriberCount} suscriptor(es)`,
+    optionsComponent: data.items[0].statistics.subscriberCount,
+    provider: "youtube",
   };
 }

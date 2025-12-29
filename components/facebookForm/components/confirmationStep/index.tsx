@@ -34,6 +34,7 @@ function ConfirmationStep(props: StepComponentProps): JSX.Element {
       />
       <div className='flex gap-5 w-full items-center justify-center max-md:flex-col'>
         <ChannelCard
+          provider='facebook'
           description={data.about}
           optionsComponent={
             <Tooltip content="Seguidores">
@@ -52,6 +53,7 @@ function ConfirmationStep(props: StepComponentProps): JSX.Element {
           <ArrowBigRight className='text-primary-500 fill-primary-500 w-14 h-14' />
         </div>
         <ChannelCard
+          provider='facebook'
           optionsComponent={<Chip variant='flat' color='success'>Activo</Chip>}
           image={formData.image[0].source}
           subtitle="Facebook"

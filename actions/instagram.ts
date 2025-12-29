@@ -58,6 +58,7 @@ export async function getInstagramChannelProps(
     subtitle: "Instagram",
     description: data.biography,
     pageLink: `https://www.instagram.com/${data.username}`,
-    optionsComponent: `${data.followers_count} seguidor(es)`,
+    optionsComponent: data.followers_count,
+    provider: "instagram",
   };
 }
