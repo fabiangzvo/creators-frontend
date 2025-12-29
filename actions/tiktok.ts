@@ -9,7 +9,7 @@ export async function getAccountInfo(
 ): Promise<TiktokAccountInfo> {
   try {
     const response = await axios.get<{ data: TiktokAccountInfo }>(
-      "https://open.tiktokapis.com/v2/user/info",
+      "https://open.tiktokapis.com/v2/user/info/",
       {
         params: {
           fields:

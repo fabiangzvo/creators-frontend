@@ -32,7 +32,8 @@ export async function getInstagramAccount(
 ): Promise<string | ListOption[]> {
   const data = await getAccountInfo(accessToken);
 
-  if (Object.keys(data).length > 0) throw new Error("No data found");
+  if (Object.keys(data).length === 0)
+    throw new Error("No se pudo obtener la información de Instagram");
 
   return [
     {
@@ -48,7 +49,8 @@ export async function getInstagramChannelProps(
 ): Promise<ChannelCardProps> {
   const data = await getAccountInfo(accessToken);
 
-  if (!data || !data.id) throw new Error("No tienes páginas disponibles");
+  if (Object.keys(data).length === 0)
+    throw new Error("No se pudo obtener la información de Instagram");
 
   return {
     image: data.profile_picture_url,
