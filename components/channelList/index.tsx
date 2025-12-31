@@ -48,10 +48,15 @@ function ChannelList(): JSX.Element {
 
   return (
     <div className="container flex flex-col gap-6 items-center">
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 w-full max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 max-md:px-3">
         {cards}
       </div>
-      <Pagination showControls initialPage={1} total={Math.ceil((count || 0) / filters.limit)} onChange={(page) => setFilters((prev) => ({ ...prev, page }))} />
+      <Pagination
+        showControls
+        initialPage={1}
+        total={Math.ceil((count || 0) / filters.limit)}
+        onChange={(page) => setFilters((prev) => ({ ...prev, page }))}
+      />
     </div>
   );
 }
