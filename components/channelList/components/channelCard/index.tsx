@@ -8,13 +8,14 @@ import { Badge } from "@heroui/badge";
 
 import { PROVIDER_ICONS } from '@/components/channelForm/components/confirmationStep/constants';
 import { Providers } from '@/types/providers'
+import { Link } from '@heroui/link';
 
 import ActionButton from "../actionButton";
 import { ChannelCardProps } from './types'
 import { statusVariants, StatusVariants, badgeVariants, BadgeVariants } from './variants'
 
 function ChannelCard(props: ChannelCardProps): JSX.Element {
-  const { id, name, status, provider, accountId, apiKey, refresh, image } = props;
+  const { id, name, status, provider, apiKey, refresh, image } = props;
 
   const ProviderIcon = PROVIDER_ICONS[provider.name as Providers]
 
@@ -41,7 +42,12 @@ function ChannelCard(props: ChannelCardProps): JSX.Element {
             </Badge>
           </div>
           <div className="flex flex-col gap-1 w-full">
-            <p className="text-md line-clamp-1 w-full">{name}</p>
+            <Link
+              href={`/channels/${id}`}
+              className="font-semibold text-foreground text-md line-clamp-1 w-full"
+            >
+              {name}
+            </Link>
             <p className={statusVariants({ variant: status.name as StatusVariants['variant'] })}>
               {status.name || "Inactivo"}
             </p>
