@@ -1,4 +1,6 @@
 import "@/styles/globals.css";
+
+import { PropsWithChildren, type JSX } from "react";
 import { Metadata, Viewport } from "next";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
   icons: {
     icon: "/favicon.ico",
   },
@@ -28,11 +31,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: PropsWithChildren): JSX.Element {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
@@ -50,17 +49,6 @@ export default function RootLayout({
               <main className="w-full h-full flex justify-center">
                 {children}
               </main>
-              <footer className="w-full flex items-center justify-center py-3 mt-52">
-                <Link
-                  isExternal
-                  className="flex items-center gap-1 text-current"
-                  href="https://linkedin.com/in/fabiangzvo"
-                  title="Fabian Guzmán Otavo LinkedIn profile"
-                >
-                  <span className="text-default-600">Powered by</span>
-                  <p className="text-primary">@fabiangzvo</p>
-                </Link>
-              </footer>
             </div>
           </div>
         </Providers>
