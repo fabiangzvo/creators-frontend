@@ -1,13 +1,15 @@
 import { JSX } from "react";
 
-import ChannelList from "@/components/channelList";
+import ChannelExplorer from "@/components/channelExplorer";
 
-function Channels(): JSX.Element {
+export const metadata = {
+  title: "Canales",
+  description: "Explora los canales que haz integrado",
+};
+
+async function Channels(): Promise<JSX.Element> {
   return (
-    <div className="container flex flex-col">
-
-      <ChannelList />
-    </div>
+    <ChannelExplorer />
   );
 }
 

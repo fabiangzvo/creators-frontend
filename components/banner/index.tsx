@@ -8,26 +8,33 @@ import { Link } from "@heroui/link";
 
 import SearchInput from "@/components/searchInput";
 
-function Banner(): JSX.Element {
+import { BannerProps } from './types';
+
+function Banner(props: BannerProps): JSX.Element {
+  const { title, description, link, handleSearch } = props
+
   return (
     <div className="grid grid-cols-2 mb-8">
-      <h1 className="text-2xl font-bold">Canales</h1>
-      <div className="flex justify-end gap-2">
+      <div>
+        <h1 className="text-2xl font-bold">{title}</h1>
+        <p className=" text-foreground/50">{description}</p>
+      </div>
+      <div className="flex justify-end gap-4">
         <SearchInput
-          handleSearch={(e) => console.log(e)}
+          handleSearch={handleSearch}
           variant="flat"
         />
-        <Tooltip content="Crear canal" placement="bottom">
+        {link && <Tooltip content="Crear canal" placement="bottom">
           <Button
             variant="solid"
             as={Link}
             color="primary"
             isIconOnly
-            href="/channels/create"
+            href={link}
           >
             <PlusIcon />
           </Button>
-        </Tooltip>
+        </Tooltip>}
       </div>
     </div>
   )

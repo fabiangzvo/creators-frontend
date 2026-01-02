@@ -1,29 +1,14 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + HeroUI",
-  description: "Make beautiful websites regardless of your design experience.",
-  navItems: [
-    {
-      label: "Home",
-      href: "/",
-    },
-    {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
-    },
+  name: "Creators",
+  description:
+    "Creators centraliza y automatiza la distribución del contenido en redes sociales, utilizando IA para generar contenido original.",
+  keywords: [
+    "IA para creadores",
+    "monetización de contenido",
+    "generación de contenido con IA",
+    "automatización digital",
   ],
   navMenuItems: [
     {
