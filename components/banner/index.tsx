@@ -14,7 +14,7 @@ function Banner(props: BannerProps): JSX.Element {
   const { title, description, link, handleSearch } = props
 
   return (
-    <div className="grid grid-cols-2 mb-8">
+    <div className="grid grid-cols-2 mb-8 max-md:grid-cols-1 max-md:gap-4">
       <div>
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className=" text-foreground/50">{description}</p>
