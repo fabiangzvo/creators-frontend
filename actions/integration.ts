@@ -1,7 +1,7 @@
 "use server";
 
 import { apiIntegration } from "@/lib/axios";
-import { IntegrationBody } from "@/types/integrations";
+import { Integration, IntegrationBody } from "@/types/integrations";
 
 export async function deleteIntegration(
   integrationId: string
@@ -39,6 +39,22 @@ export async function createIntegration(data: IntegrationBody): Promise<any> {
 
     return response.data;
   } catch (e) {
+    console.error(JSON.stringify(e, null, 2));
+
     return { status: false, data: null };
+  }
+}
+
+export async function getIntegrationById(
+  integrationId: string
+): Promise<Integration | null> {
+  try {
+    const response = await apiIntegration.get(`/integrations/${integrationId}`);
+
+    return response.data;
+  } catch (e) {
+    console.error(JSON.stringify(e, null, 2));
+
+    return null;
   }
 }

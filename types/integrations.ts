@@ -15,6 +15,7 @@ export interface Integration {
   updatedAt: string;
   image: string;
   token: string;
+  user?: any;
 }
 
 export interface IntegrationBody {
