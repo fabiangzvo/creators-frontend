@@ -14,6 +14,7 @@ import { provider } from "./provider";
 export const integration = pgTable("integration", {
   id: uuid("id").defaultRandom().primaryKey(),
   name: text("name").notNull(),
+  description: text("description"),
   accountId: text("account_id").notNull(),
   apiKey: text("api_key").notNull(),
   enabled: boolean("enabled").default(true),
