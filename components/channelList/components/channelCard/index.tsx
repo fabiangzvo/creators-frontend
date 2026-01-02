@@ -2,45 +2,24 @@
 
 import { JSX } from 'react'
 import { Card, CardHeader, CardBody } from "@heroui/card";
-import { Image } from "@heroui/image";
 import { Snippet } from "@heroui/snippet";
-import { Badge } from "@heroui/badge";
-
-import { PROVIDER_ICONS } from '@/components/channelForm/components/confirmationStep/constants';
-import { Providers } from '@/types/providers'
 import { Link } from '@heroui/link';
+
+import { Providers } from '@/types/providers'
+import ImageWithProvider from '@/components/imageWithProvider';
 
 import ActionButton from "../actionButton";
 import { ChannelCardProps } from './types'
-import { statusVariants, StatusVariants, badgeVariants, BadgeVariants } from './variants'
+import { statusVariants, StatusVariants } from './variants'
 
 function ChannelCard(props: ChannelCardProps): JSX.Element {
   const { id, name, status, provider, apiKey, refresh, image } = props;
 
-  const ProviderIcon = PROVIDER_ICONS[provider.name as Providers]
-
   return (
     <Card >
-      <CardHeader className="flex gap-2 justify-between">
+      <CardHeader className="flex gap-2 justify-between items-start">
         <div className="flex gap-5 w-full">
-          <div>
-            <Badge
-              variant="solid"
-              color="primary"
-              placement='bottom-right'
-              className={badgeVariants({ variant: provider.name as BadgeVariants['variant'] })}
-              content={<ProviderIcon size={20} />}
-            >
-              <Image
-                alt={name}
-                height={50}
-                width={50}
-                radius="sm"
-                src={image}
-                fallbackSrc={`https://avatars.githubusercontent.com/u/${Math.floor(Math.random() * 1000)}?s=100`}
-              />
-            </Badge>
-          </div>
+          <ImageWithProvider src={image} alt={name} provider={provider.name as Providers} />
           <div className="flex flex-col gap-1 w-full">
             <Link
               href={`/channels/${id}`}

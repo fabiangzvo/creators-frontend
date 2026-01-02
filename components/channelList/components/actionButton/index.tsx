@@ -1,3 +1,5 @@
+"use client"
+
 import { Fragment, JSX, Key, useCallback } from 'react'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown"
 import { Button } from "@heroui/button"
@@ -13,7 +15,7 @@ import { ActionButtonProps } from "./types"
 import { buttonVariants } from "./variants"
 
 function ActionButton(props: ActionButtonProps): JSX.Element {
-  const { integrationId, refresh, status } = props;
+  const { integrationId, status, refresh = () => window.location.reload() } = props;
 
   const router = useRouter();
   const { confirm, ConfirmDialog } = useConfirm();
@@ -71,27 +73,28 @@ function ActionButton(props: ActionButtonProps): JSX.Element {
     }
   }, [integrationId, router, status]);
 
-  return (<Fragment>
-    <Dropdown >
-      <DropdownTrigger>
-        <Button variant="light" color='primary' size='sm' isIconOnly >
-          <MoreVertical />
-        </Button>
-      </DropdownTrigger>
-      <DropdownMenu aria-label="Acciones del canal" variant='flat' items={ACTIONS} onAction={handleAction}>
-        {(item) => (
-          <DropdownItem
-            key={item.key}
-            classNames={{ base: buttonVariants({ variant: item.key === "delete" ? "danger" : "default" }) }}
-            color={item.key === "delete" ? "danger" : "default"}
-          >
-            {item.label}
-          </DropdownItem>
-        )}
-      </DropdownMenu>
-    </Dropdown >
-    <ConfirmDialog />
-  </Fragment>
+  return (
+    <Fragment>
+      <Dropdown >
+        <DropdownTrigger>
+          <Button variant="light" color='primary' size='sm' isIconOnly >
+            <MoreVertical />
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Acciones del canal" variant='flat' items={ACTIONS} onAction={handleAction}>
+          {(item) => (
+            <DropdownItem
+              key={item.key}
+              classNames={{ base: buttonVariants({ variant: item.key === "delete" ? "danger" : "default" }) }}
+              color={item.key === "delete" ? "danger" : "default"}
+            >
+              {item.label}
+            </DropdownItem>
+          )}
+        </DropdownMenu>
+      </Dropdown >
+      <ConfirmDialog />
+    </Fragment>
   )
 }
 

@@ -2,8 +2,10 @@ import "@/styles/globals.css";
 
 import { PropsWithChildren, type JSX } from "react";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
+import dayjs from 'dayjs'
+
+import 'dayjs/locale/es'
 
 import { Providers } from "./providers";
 
@@ -11,6 +13,8 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import VerticalSidebar from '@/components/verticalSidebar';
+
+dayjs.locale('es')
 
 export const metadata: Metadata = {
   title: {

@@ -1,6 +1,6 @@
 export interface ActionButtonProps {
   integrationId: string;
-  refresh: () => void;
+  refresh?: () => void;
   status: string;
 }
 
