@@ -9,9 +9,10 @@ import Loader from "../loader";
 import EmptyMessage from "./components/emptyMessage";
 import ChannelCard from "./components/channelCard";
 import { ChannelListProps } from "./types"
+import ErrorMessage from "./components/errorMessage";
 
 function ChannelList(props: ChannelListProps): JSX.Element {
-  const { data, count, limit, mutate, handlePageChange, isLoading, error } = props;
+  const { data, count, limit, mutate, handlePageChange, isLoading, isError = false } = props;
 
   const cards = useMemo(() => data?.map(
     (integration: Integration) => <ChannelCard key={integration.id} refresh={mutate} {...integration} />),
@@ -19,7 +20,7 @@ function ChannelList(props: ChannelListProps): JSX.Element {
 
   if (isLoading) return <Loader />;
 
-  if (error) return <div>Error: {error.message}</div>;
+  if (isError) return <ErrorMessage />;
 
   if (data.length === 0) return <EmptyMessage />;
 

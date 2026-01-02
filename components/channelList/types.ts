@@ -7,5 +7,5 @@ export interface ChannelListProps {
   mutate: () => void;
   handlePageChange: (page: number) => void;
   isLoading: boolean;
-  error: Error | null;
+  isError?: boolean;
 }

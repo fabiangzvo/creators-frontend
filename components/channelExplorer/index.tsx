@@ -48,8 +48,8 @@ function ChannelExplorer(): JSX.Element {
         limit={filters.limit}
         mutate={mutate}
         isLoading={isLoading}
-        error={error}
         handlePageChange={(page) => setFilters((prev) => ({ ...prev, page }))}
+        isError={!!error}
       />
     </div>
   )
