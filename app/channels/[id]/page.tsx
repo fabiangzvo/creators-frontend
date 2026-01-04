@@ -64,7 +64,7 @@ async function Page({ params }: ChannelPageProps): Promise<JSX.Element> {
         <OptionActionButton integrationId={id} status={integration.status.name} />
       </div>
       <StatList items={statList} />
-      <ChannelTabs />
+      <ChannelTabs integration={integration} />
     </div>
   )
 }

@@ -18,7 +18,7 @@ export async function getPages(
           method: "get",
           transport: "cors",
           fields:
-            "about,picture{url,cache_key,height,width},app_id,name,category_list,followers_count",
+            "about,picture{url,cache_key,height,width},app_id,name,category_list,followers_count,phone,website",
         },
       }
     );

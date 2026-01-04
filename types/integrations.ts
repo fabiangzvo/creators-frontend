@@ -16,6 +16,7 @@ export interface Integration {
   image: string;
   token: string;
   user?: any;
+  description: string;
 }
 
 export interface IntegrationBody {

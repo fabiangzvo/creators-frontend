@@ -18,4 +18,6 @@ export interface FacebookPageInfo {
   id: string;
   followers_count: number;
   category_list: FacebookCategory[];
+  phone: string;
+  website: string;
 }
