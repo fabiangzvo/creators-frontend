@@ -40,28 +40,25 @@ async function Page({ params }: ChannelPageProps): Promise<JSX.Element> {
 
   return (
     <div className='container flex flex-col gap-4 w-full mt-2'>
-      <div className='flex justify-between'>
-        <div className="flex gap-5 w-full">
-          <ImageWithProvider
-            src={integration.image}
-            alt={integration.name}
-            provider={integration.provider.name as Providers}
-          />
-          <section className='flex flex-col'>
-            <div className="flex gap-2 w-full">
-              <h1 className="font-semibold text-foreground text-2xl line-clamp-1">
-                {integration.name}
-              </h1>
-              <Chip className={statusVariants({ variant: integration.status.name as StatusVariants['variant'] })}>
-                {integration.status.name || "Inactive"}
-              </Chip>
-            </div>
-            <article className="text-sm text-foreground/50 font-medium">{integration.provider.name} ·
-              Conectado el {day(integration.createdAt).format('D MMM YYYY')}
-            </article>
-          </section>
-        </div>
-        <OptionActionButton integrationId={id} status={integration.status.name} />
+      <div className="flex gap-5 w-full">
+        <ImageWithProvider
+          src={integration.image}
+          alt={integration.name}
+          provider={integration.provider.name as Providers}
+        />
+        <section className='flex flex-col'>
+          <div className="flex gap-2 w-full">
+            <h1 className="font-semibold text-foreground text-2xl line-clamp-1">
+              {integration.name}
+            </h1>
+            <Chip className={statusVariants({ variant: integration.status.name as StatusVariants['variant'] })}>
+              {integration.status.name || "Inactive"}
+            </Chip>
+          </div>
+          <article className="text-sm text-foreground/50 font-medium">{integration.provider.name} ·
+            Conectado el {day(integration.createdAt).format('D MMM YYYY')}
+          </article>
+        </section>
       </div>
       <StatList items={statList} />
       <ChannelTabs integration={integration} />

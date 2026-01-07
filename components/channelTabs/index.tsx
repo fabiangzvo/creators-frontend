@@ -2,9 +2,10 @@
 
 import { JSX } from 'react'
 import { Tabs, Tab } from "@heroui/tabs";
-import { Card, CardBody } from "@heroui/card";
 
 import GeneralTab from "./components/generalTab";
+import PostTab from './components/postsTab';
+import SettingTab from './components/settingsTab';
 import { ChannelTabsProps } from "./types";
 
 function ChannelTabs(props: ChannelTabsProps): JSX.Element {
@@ -26,22 +27,13 @@ function ChannelTabs(props: ChannelTabsProps): JSX.Element {
           />
         </Tab>
         <Tab key="posts" title="Publicaciones">
-          <Card className="h-full">
-            <CardBody>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur.
-            </CardBody>
-          </Card>
+          <PostTab />
         </Tab>
         <Tab key="settings" title="Configuración">
-          <Card className="h-full">
-            <CardBody>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </CardBody>
-          </Card>
+          <SettingTab
+            integrationId={integration.id}
+            status={integration.status.name}
+          />
         </Tab>
       </Tabs>
     </div>
