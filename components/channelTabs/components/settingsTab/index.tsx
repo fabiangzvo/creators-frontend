@@ -74,7 +74,7 @@ function SettingTab(props: SettingTabProps): JSX.Element {
       <CardBody className='px-4'>
         <div className='flex justify-between gap-4 my-2'>
           <div>
-            <p className='font-semibold text-lg'>Estado: {status === 'active' ? 'Activo' : 'Deshabilitado'}</p>
+            <p className='font-semibold text-lg'>Cambiar estado</p>
             <p >Al apagar este canal, no se podrá publicar contenido nuevo pero se conservará toda la información.</p>
           </div>
           <Switch

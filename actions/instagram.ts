@@ -21,6 +21,7 @@ export async function getAccountInfo(
 
     return response.data as InstagramPageInfo;
   } catch (e) {
+    console.error("---------------------meloooooo");
     console.error(e);
 
     return {} as InstagramPageInfo;

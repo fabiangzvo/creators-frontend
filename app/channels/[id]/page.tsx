@@ -2,14 +2,15 @@ import { JSX } from 'react'
 import day from "dayjs";
 import { Chip } from '@heroui/chip';
 import { Camera, MessageSquareMore, ThumbsUp } from 'lucide-react';
-
+import { headers } from 'next/headers'
+import { redirect } from "next/navigation";
 import { getIntegrationById } from '@/actions/integration'
 import { statusVariants, StatusVariants } from '@/components/channelList/components/channelCard/variants'
 import { Providers } from '@/types/providers';
 import ImageWithProvider from '@/components/imageWithProvider';
-import OptionActionButton from '@/components/channelList/components/actionButton';
 import ChannelTabs from '@/components/channelTabs';
 import StatList from '@/components/statList';
+import { auth } from "@/lib/auth";
 
 import { ChannelPageProps } from './types'
 
@@ -19,6 +20,18 @@ async function Page({ params }: ChannelPageProps): Promise<JSX.Element> {
   const integration = await getIntegrationById(id)
 
   if (!integration) return <div>Integration not found</div>
+
+  const { provider: { name: providerName } } = integration
+
+  const session = await auth.api.getAccessToken({
+    headers: await headers(),
+    body: {
+      providerId: providerName === 'youtube' ? "google" : providerName
+    },
+  })
+
+  if (!session?.accessToken) return redirect("/channels")
+
 
   const statList = [
     {
@@ -61,7 +74,7 @@ async function Page({ params }: ChannelPageProps): Promise<JSX.Element> {
         </section>
       </div>
       <StatList items={statList} />
-      <ChannelTabs integration={integration} />
+      <ChannelTabs integration={integration} token={session.accessToken!} />
     </div>
   )
 }

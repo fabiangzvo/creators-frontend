@@ -2,7 +2,6 @@ import axios from "axios";
 
 import { FacebookPageInfo } from "@/types/facebook";
 import { ListOption } from "@/components/formStepper/types";
-import { ProvidersWithDetailFetchFunc } from "@/types/providers";
 import { ChannelCardProps } from "@/components/facebookForm/components/channelCard/types";
 
 export async function getPages(
