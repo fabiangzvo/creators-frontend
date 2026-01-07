@@ -1,6 +1,8 @@
 import { JSX } from 'react'
 import { Card, CardBody, CardHeader } from "@heroui/card";
 
+import EmptyMessage from '@/components/channelList/components/emptyMessage';
+
 function PostTab(): JSX.Element {
   return (
     <Card className="h-full p-4" shadow='sm'>
@@ -11,9 +13,12 @@ function PostTab(): JSX.Element {
         <p className='text-foreground/50'>Gestiona todas las publicaciones realizadas desde Creators.</p>
       </CardHeader>
       <CardBody>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur.
+        <EmptyMessage
+          label="Todavía no has creado ninguna publicación."
+          linkLabel="¡Crea la primera!"
+          link="/posts/create"
+          containerClassName="my-6"
+        />
       </CardBody>
     </Card>
   )

@@ -22,7 +22,13 @@ function ChannelList(props: ChannelListProps): JSX.Element {
 
   if (isError) return <ErrorMessage />;
 
-  if (data.length === 0) return <EmptyMessage />;
+  if (data.length === 0)
+    return (
+      <EmptyMessage
+        label="Todavía no has conectado ningún canal."
+        linkLabel="¡Crea una integración para empezar!"
+        link="/channels/create"
+      />);
 
   return (
     <div className="container flex flex-col gap-6 items-center h-full">
