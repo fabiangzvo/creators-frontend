@@ -35,7 +35,7 @@ function ChannelExplorer(): JSX.Element {
     });
 
   return (
-    <div className="container flex flex-col mt-2 h-full">
+    <div className="container flex flex-col pt-2 h-full">
       <Banner
         title="Canales"
         description="Explora los canales que haz integrado"

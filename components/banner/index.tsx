@@ -20,10 +20,13 @@ function Banner(props: BannerProps): JSX.Element {
         <p className=" text-foreground/50">{description}</p>
       </div>
       <div className="flex justify-end gap-4">
-        <SearchInput
-          handleSearch={handleSearch}
-          variant="flat"
-        />
+        {
+          handleSearch &&
+          <SearchInput
+            handleSearch={handleSearch}
+            variant="flat"
+          />
+        }
         {link && <Tooltip content="Crear canal" placement="bottom">
           <Button
             variant="solid"
