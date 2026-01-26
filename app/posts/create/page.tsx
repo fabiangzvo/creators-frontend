@@ -1,9 +1,7 @@
 "use client";
 
-import React from 'react'
-
 import { FormStepper } from '@/components/formStepper'
-import { createPostSteps } from '@/components/createPost/steps-config'
+import { createPostSteps } from '@/components/createPost'
 
 function Page() {
   return (
@@ -13,7 +11,7 @@ function Page() {
         onComplete={async (data) => {
           console.log("Completed:", data);
         }}
-        provider="instagram" // Mock provider for types
+        provider="instagram"
       />
     </div>
   )
