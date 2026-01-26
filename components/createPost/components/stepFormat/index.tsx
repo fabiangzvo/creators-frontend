@@ -40,7 +40,7 @@ export default function StepFormat({
               >
                 <CardBody className="flex flex-col items-center justify-center gap-2">
                   <Icon className="w-10 h-10" />
-                  <span className="text-lg font-medium">{format.label}</span>
+                  <span className="text-base font-medium">{format.label}</span>
                 </CardBody>
               </Button>
             );

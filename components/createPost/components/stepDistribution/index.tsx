@@ -52,14 +52,13 @@ export default function StepDistribution({
     <div className="flex flex-col w-full max-w-2xl mx-auto gap-8 py-8 items-center">
       <div className="w-full">
         <Tabs
-          aria-label="Distribution Options"
           fullWidth
+          color="primary"
+          variant="bordered"
           size="lg"
+          aria-label="Distribution Options"
           classNames={{
-            tabList: "bg-default-100/50 p-1",
-            cursor: "w-full bg-background shadow-sm",
-            tab: "h-10",
-            tabContent: "text-default-500 group-data-[selected=true]:text-foreground font-medium"
+            tabList: "shadow mb-4 [&_div]:text-foreground [&_div]:font-medium",
           }}
         >
           <Tab key="strategies" title="Distribuciones">
