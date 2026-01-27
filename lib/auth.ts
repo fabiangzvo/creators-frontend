@@ -68,7 +68,6 @@ export const auth = betterAuth({
         });
 
         const data = await res.json();
-        console.log("asdasd", data);
         return {
           accessToken: data.access_token,
           refreshToken: data.refresh_token,

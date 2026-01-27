@@ -15,7 +15,6 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   if (metadata) {
     const imageData = JSON.parse(metadata.toString());
-    console.log("Metadata FilePond:", imageData);
   }
 
   const { url } = await put(`media/${file.name}`, file, {
