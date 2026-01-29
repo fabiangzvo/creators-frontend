@@ -54,14 +54,30 @@ export default function StepReview({ formData }: StepComponentProps) {
     { id: "tiktok", label: "TikTok" },
   ];
 
-  // Helper to format date/time
+  // Helper to format date/time in Spanish
   const formatSchedule = () => {
     if (formData.scheduleType !== "schedule") return "Ahora mismo";
+    if (!formData.scheduledDate || !formData.scheduledTime) return "Fecha pendiente";
 
-    const date = formData.scheduledDate?.toString() || "";
-    const time = formData.scheduledTime?.toString() || "";
+    try {
+      const dateStr = formData.scheduledDate.toString();
+      const timeStr = formData.scheduledTime.toString();
+      // Combine date and time into a single Date object
+      // Assuming scheduledDate is YYYY-MM-DD and scheduledTime is HH:mm
+      const dateTime = new Date(`${dateStr}T${timeStr}`);
 
-    return `${date} ${time}`.trim() || "Fecha pendiente";
+      return new Intl.DateTimeFormat("es-ES", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }).format(dateTime);
+    } catch (e) {
+      return `${formData.scheduledDate} ${formData.scheduledTime}`;
+    }
   };
 
   const getDistributionDisplay = () => {
@@ -126,39 +142,42 @@ export default function StepReview({ formData }: StepComponentProps) {
       {/* Left: Summary Info */}
       <div className="flex flex-col gap-10 pt-4">
 
-        {/* 1. Canales seleccionados */}
-        <div className="space-y-4">
+        {/* Row 1: Programación & Formato */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            {/* 1. Programación */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-foreground font-bold text-lg">
+                {formData.scheduleType === "schedule" ? (
+                  <Calendar className="text-primary-500" size={24} />
+                ) : (
+                  <Zap className="text-primary-500" size={24} />
+                )}
+                <h3>Programación</h3>
+              </div>
+              <p className="text-default-600 text-base pl-1 font-medium capitalize">
+                {formatSchedule()}
+              </p>
+            </div>
+
+            {/* 2. Formato */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-foreground font-bold text-lg">
+                <MonitorPlay className="text-primary-500" size={24} />
+                <h3>Formato</h3>
+              </div>
+              <p className="text-default-600 text-base capitalize pl-1 font-medium">
+                {formData.format || "Reel"}
+              </p>
+            </div>
+        </div>
+
+        {/* Row 2: Canales seleccionados (Full Width) */}
+        <div className="space-y-4 w-full">
           <div className="flex items-center gap-2 text-foreground font-bold text-lg">
             <Share2 className="text-primary-500" size={24} />
             <h3>Canales seleccionados</h3>
           </div>
           <div className="pl-1">{getDistributionDisplay()}</div>
-        </div>
-
-        {/* 2. Programación */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-            {formData.scheduleType === "schedule" ? (
-              <Calendar className="text-primary-500" size={24} />
-            ) : (
-              <Zap className="text-primary-500" size={24} />
-            )}
-            <h3>Programación</h3>
-          </div>
-          <p className="text-default-600 text-base pl-1 font-medium">
-            {formatSchedule()}
-          </p>
-        </div>
-
-        {/* 3. Formato */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-            <MonitorPlay className="text-primary-500" size={24} />
-            <h3>Formato</h3>
-          </div>
-          <p className="text-default-600 text-base capitalize pl-1 font-medium">
-            {formData.format || "Reel"}
-          </p>
         </div>
 
       </div>
