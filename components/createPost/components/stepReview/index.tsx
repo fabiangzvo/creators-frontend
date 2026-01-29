@@ -10,7 +10,6 @@ import {
   Instagram,
   MonitorPlay,
   Zap,
-  FileText,
   Calendar,
   Share2,
 } from "lucide-react";
@@ -73,8 +72,11 @@ export default function StepReview({ formData }: StepComponentProps) {
         return (
           <div className="flex flex-wrap gap-2">
             <Chip
-              color="primary"
-              startContent={<strategy.icon size={16} />}
+              classNames={{
+                base: "bg-primary-500/10 border-small border-primary-500/50",
+                content: "text-primary-700 font-medium",
+              }}
+              startContent={<strategy.icon size={16} className="text-primary-500" />}
               variant="flat"
             >
               {strategy.title}
@@ -97,7 +99,10 @@ export default function StepReview({ formData }: StepComponentProps) {
               <Chip
                 key={cid}
                 className="capitalize"
-                color="primary"
+                classNames={{
+                  base: "bg-primary-500/10 border-small border-primary-500/50",
+                  content: "text-primary-700 font-medium",
+                }}
                 size="md"
                 variant="flat"
               >
@@ -118,56 +123,44 @@ export default function StepReview({ formData }: StepComponentProps) {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full py-6 px-2">
-      {/* Left: Summary Info (Clean Design) */}
+      {/* Left: Summary Info */}
       <div className="flex flex-col gap-10 pt-4">
-        {/* Pie de foto */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-            <FileText className="text-primary-500" size={20} />
-            <h3>Pie de foto</h3>
-          </div>
-          <p className="text-default-600 text-base leading-relaxed pl-1">
-            {formData.description || (
-              <span className="italic opacity-50">Sin descripción...</span>
-            )}
-          </p>
-        </div>
 
-        {/* Row: Formato & Programación */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-              <MonitorPlay className="text-primary-500" size={20} />
-              <h3>Formato</h3>
-            </div>
-            <p className="text-default-600 text-base capitalize pl-1">
-              {formData.format || "Reel"}
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-              {formData.scheduleType === "schedule" ? (
-                <Calendar className="text-primary-500" size={20} />
-              ) : (
-                <Zap className="text-primary-500" size={20} />
-              )}
-              <h3>Programación</h3>
-            </div>
-            <p className="text-default-600 text-base pl-1">
-              {formatSchedule()}
-            </p>
-          </div>
-        </div>
-
-        {/* Canales */}
+        {/* 1. Canales seleccionados */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-            <Share2 className="text-primary-500" size={20} />
+            <Share2 className="text-primary-500" size={24} />
             <h3>Canales seleccionados</h3>
           </div>
           <div className="pl-1">{getDistributionDisplay()}</div>
         </div>
+
+        {/* 2. Programación */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-foreground font-bold text-lg">
+            {formData.scheduleType === "schedule" ? (
+              <Calendar className="text-primary-500" size={24} />
+            ) : (
+              <Zap className="text-primary-500" size={24} />
+            )}
+            <h3>Programación</h3>
+          </div>
+          <p className="text-default-600 text-base pl-1 font-medium">
+            {formatSchedule()}
+          </p>
+        </div>
+
+        {/* 3. Formato */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-foreground font-bold text-lg">
+            <MonitorPlay className="text-primary-500" size={24} />
+            <h3>Formato</h3>
+          </div>
+          <p className="text-default-600 text-base capitalize pl-1 font-medium">
+            {formData.format || "Reel"}
+          </p>
+        </div>
+
       </div>
 
       {/* Right: Preview */}
