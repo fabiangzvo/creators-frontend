@@ -123,7 +123,7 @@ export default function StepReview({ formData }: StepComponentProps) {
         {/* Pie de foto */}
         <div className="space-y-3">
           <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-            <FileText className="text-default-500" size={20} />
+            <FileText className="text-primary-500" size={20} />
             <h3>Pie de foto</h3>
           </div>
           <p className="text-default-600 text-base leading-relaxed pl-1">
@@ -137,7 +137,7 @@ export default function StepReview({ formData }: StepComponentProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-              <MonitorPlay className="text-default-500" size={20} />
+              <MonitorPlay className="text-primary-500" size={20} />
               <h3>Formato</h3>
             </div>
             <p className="text-default-600 text-base capitalize pl-1">
@@ -148,9 +148,9 @@ export default function StepReview({ formData }: StepComponentProps) {
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-foreground font-bold text-lg">
               {formData.scheduleType === "schedule" ? (
-                <Calendar className="text-default-500" size={20} />
+                <Calendar className="text-primary-500" size={20} />
               ) : (
-                <Zap className="text-default-500" size={20} />
+                <Zap className="text-primary-500" size={20} />
               )}
               <h3>Programación</h3>
             </div>
@@ -163,7 +163,7 @@ export default function StepReview({ formData }: StepComponentProps) {
         {/* Canales */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-foreground font-bold text-lg">
-            <Share2 className="text-default-500" size={20} />
+            <Share2 className="text-primary-500" size={20} />
             <h3>Canales seleccionados</h3>
           </div>
           <div className="pl-1">{getDistributionDisplay()}</div>
