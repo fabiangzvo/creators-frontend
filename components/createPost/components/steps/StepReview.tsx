@@ -8,6 +8,7 @@ import { Avatar } from "@heroui/avatar";
 import { Image } from "@heroui/image";
 import { StepComponentProps } from "@/components/formStepper/types";
 import { MapPin, Calendar, Globe } from "lucide-react";
+import { STRATEGIES_LIST } from "../../constants";
 
 export default function StepReview({
   formData,
@@ -64,7 +65,16 @@ export default function StepReview({
           <h4 className="text-xs font-semibold uppercase text-default-500">DISTRIBUCIÓN</h4>
           <div className="flex items-center gap-2 text-sm text-foreground">
             <Globe size={16} className="text-default-500" />
-            {formData.strategy === "global" ? "Estrategia Global" : formData.strategy === "visuals" ? "Solo Visuales" : "Selección Manual"}
+            {formData.strategies && formData.strategies.length > 0
+              ? formData.strategies
+                  .map((s: string) => {
+                    const strategy = STRATEGIES_LIST.find((item) => item.id === s);
+                    return strategy ? strategy.title : s;
+                  })
+                  .join(", ")
+              : formData.selectedChannels && formData.selectedChannels.length > 0
+              ? "Selección Manual"
+              : "No seleccionado"}
           </div>
         </section>
 
