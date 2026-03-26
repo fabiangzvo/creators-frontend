@@ -2,7 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FilePond, FilePondProps, registerPlugin } from "react-filepond";
-import { FilePondErrorDescription, FilePondFile, FilePondServerConfigProps } from "filepond";
+import {
+  FilePondErrorDescription,
+  FilePondFile,
+  FilePondServerConfigProps,
+} from "filepond";
 
 import "filepond/dist/filepond.min.css";
 
@@ -11,7 +15,7 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
-import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageValidateSize from "filepond-plugin-image-validate-size";
 
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -23,7 +27,7 @@ registerPlugin(
   FilePondPluginImageCrop,
   FilePondPluginFileValidateSize,
   FilePondPluginImageResize,
-  FilePondPluginImageValidateSize
+  FilePondPluginImageValidateSize,
 );
 
 export interface FileImageUploaderProps extends FilePondProps {
@@ -37,12 +41,12 @@ export default function FileImageUploader(props: FileImageUploaderProps) {
   const {
     onremovefile,
     setFiles,
-    name = '_image',
+    name = "_image",
     label = "Haga clic o arrastre para subir",
     description,
     defaultFiles,
     ...componentProps
-  } = props
+  } = props;
 
   const [files, setLocalFiles] = useState<FilePondServerConfigProps["files"]>();
   const [isFirstRender, setIsFirstRender] = useState(true);
@@ -51,6 +55,7 @@ export default function FileImageUploader(props: FileImageUploaderProps) {
   useEffect(() => {
     if (isFirstRender) {
       setIsFirstRender(false);
+
       return;
     }
 
@@ -59,50 +64,52 @@ export default function FileImageUploader(props: FileImageUploaderProps) {
     }
   }, [defaultFiles, isFirstRender]);
 
-  const onRemoveCoverImages = useCallback((
-    error: FilePondErrorDescription | null,
-    file: FilePondFile
-  ) => {
-    if (error) {
-      console.error(error);
-      return;
-    }
-    if (files?.length) {
-      const filteredFiles = files.filter((cover) => {
-        if (typeof cover === 'string') return cover !== file.filename;
-        return 'filename' in cover && cover.filename !== file.filename;
-      });
+  const onRemoveCoverImages = useCallback(
+    (error: FilePondErrorDescription | null, file: FilePondFile) => {
+      if (error) {
+        console.error(error);
 
-      console.log(filteredFiles);
-      setFiles && setFiles(filteredFiles as any as FilePondFile[]);
-    }
-    onremovefile?.(error, file);
-  }, [setFiles, files, onremovefile]);
+        return;
+      }
+      if (files?.length) {
+        const filteredFiles = files.filter((cover) => {
+          if (typeof cover === "string") return cover !== file.filename;
+
+          return "filename" in cover && cover.filename !== file.filename;
+        });
+
+        console.log(filteredFiles);
+        setFiles && setFiles(filteredFiles as any as FilePondFile[]);
+      }
+      onremovefile?.(error, file);
+    },
+    [setFiles, files, onremovefile],
+  );
 
   return (
     <div className="w-full h-full">
       <FilePond
+        ref={fileRef}
+        allowImagePreview
+        allowImageResize
+        credits={false}
+        files={files}
+        imageResizeMode="cover"
+        imageResizeTargetHeight={50}
+        imageResizeTargetWidth={50}
+        instantUpload={false}
         labelIdle={`<div class="flex flex-col items-center gap-2 px-8 hover:cursor-pointer my-4">
         <span class="text-xl font-semibold text-foreground">${label}</span>
-        ${description ? '<span class="text-sm font-medium text-foreground/40">' + description + '</span>' : ''}
+        ${description ? '<span class="text-sm font-medium text-foreground/40">' + description + "</span>" : ""}
       </div>`}
-        credits={false}
-        allowImagePreview
         maxFileSize="20MB"
-        server={{ url: "/api/upload/image" }}
-        ref={fileRef}
-        files={files}
         name={name}
+        onremovefile={onRemoveCoverImages}
         onupdatefiles={(files) => {
           setLocalFiles(files as any);
-          setFiles && setFiles(files as any)
+          setFiles && setFiles(files as any);
         }}
-        onremovefile={onRemoveCoverImages}
-        instantUpload={false}
-        allowImageResize
-        imageResizeTargetWidth={50}
-        imageResizeTargetHeight={50}
-        imageResizeMode="cover"
+        server={{ url: "/api/upload/image" }}
         {...componentProps}
       />
     </div>

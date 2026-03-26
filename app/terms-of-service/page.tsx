@@ -14,9 +14,9 @@ export default function TermsOfServicePage() {
 
         <section className="space-y-4 text-gray-700">
           <p>
-            Estos Términos y Condiciones regulan el acceso y uso de la plataforma
-            de <strong>Tu Empresa</strong>. Al acceder o utilizar el servicio,
-            aceptas cumplir con estos términos.
+            Estos Términos y Condiciones regulan el acceso y uso de la
+            plataforma de <strong>Tu Empresa</strong>. Al acceder o utilizar el
+            servicio, aceptas cumplir con estos términos.
           </p>
 
           <h2 className="text-xl font-semibold text-gray-900">
@@ -51,8 +51,8 @@ export default function TermsOfServicePage() {
           </h2>
           <p>
             Todos los contenidos, marcas y elementos de la plataforma son
-            propiedad de <strong>Tu Empresa</strong> o de sus licenciantes. Queda
-            prohibida su reproducción sin autorización expresa.
+            propiedad de <strong>Tu Empresa</strong> o de sus licenciantes.
+            Queda prohibida su reproducción sin autorización expresa.
           </p>
 
           <h2 className="text-xl font-semibold text-gray-900">
@@ -68,7 +68,7 @@ export default function TermsOfServicePage() {
             6. Limitación de responsabilidad
           </h2>
           <p>
-            El servicio se proporciona "tal cual". <strong>Tu Empresa</strong>
+            El servicio se proporciona &quot;tal cual&quot;. <strong>Tu Empresa</strong>
             no será responsable por daños directos o indirectos derivados del
             uso o imposibilidad de uso de la plataforma.
           </p>

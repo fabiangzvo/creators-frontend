@@ -1,6 +1,6 @@
-import { Providers } from "@/types/providers";
-
 import { FormDataType, StepConfig } from "../../types";
+
+import { Providers } from "@/types/providers";
 
 export interface StepContentProps {
   stepConfig: StepConfig;

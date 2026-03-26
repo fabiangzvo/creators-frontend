@@ -46,7 +46,7 @@ interface FormStoreActions {
   handleChange: (fieldName: string, value: any) => void;
   handleBlur: (fieldName: string) => void;
   nextStep: (
-    onComplete: (data: FormDataType) => Promise<void>
+    onComplete: (data: FormDataType) => Promise<void>,
   ) => Promise<void>;
   prevStep: () => void;
   goToStep: (step: number) => void;

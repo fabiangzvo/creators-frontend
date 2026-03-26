@@ -1,5 +1,6 @@
 import useSWR, { SWRConfiguration, SWRResponse } from "swr";
 import { AxiosInstance } from "axios";
+
 import { Instances } from "@/types/axios";
 import { apiClients } from "@/lib/axios";
 
@@ -36,6 +37,7 @@ function urlBuilder(baseUrl: string, params?: Record<string, any>): string {
   };
 
   flattenParams(params);
+
   return `${baseUrl}?${queryString.toString()}`;
 }
 
@@ -47,7 +49,7 @@ const dataFetcher = (axiosInstance: AxiosInstance) => async (url: string) => {
 
 export const useFetch = <T>(
   url: string | null,
-  options: UseFetchOptions
+  options: UseFetchOptions,
 ): SWRResponse<T> => {
   const { api = "integration", queryParams, ...swrOptions } = options;
 

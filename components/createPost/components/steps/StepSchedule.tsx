@@ -6,6 +6,7 @@ import { DatePicker } from "@heroui/date-picker";
 import { TimeInput } from "@heroui/date-input";
 import { cn } from "@heroui/theme";
 import { Zap, Calendar } from "lucide-react";
+
 import { StepComponentProps } from "@/components/formStepper/types";
 
 export default function StepSchedule({
@@ -21,21 +22,35 @@ export default function StepSchedule({
     <div className="flex flex-col w-full max-w-3xl mx-auto gap-8 py-8 items-center">
       <div className="text-center space-y-2">
         <h2 className="text-2xl font-bold">Programación</h2>
-        <p className="text-default-500">Elige el momento perfecto para conectar con tu audiencia.</p>
+        <p className="text-default-500">
+          Elige el momento perfecto para conectar con tu audiencia.
+        </p>
       </div>
 
       <div className="flex gap-6 w-full max-w-2xl">
         <Card
           isPressable
-          onPress={() => handleChange("scheduleType", "now")}
           className={cn(
             "flex-1 border-2 transition-all duration-200 h-32",
-            scheduleType === "now" ? "border-black dark:border-white shadow-md" : "border-transparent hover:border-default-200"
+            scheduleType === "now"
+              ? "border-black dark:border-white shadow-md"
+              : "border-transparent hover:border-default-200",
           )}
+          onPress={() => handleChange("scheduleType", "now")}
         >
           <CardBody className="flex flex-col items-center justify-center gap-2">
-            <Zap className={cn("w-6 h-6", scheduleType === "now" ? "text-foreground" : "text-default-500")} />
-            <span className={cn("text-sm font-medium", scheduleType === "now" ? "text-foreground" : "text-default-500")}>
+            <Zap
+              className={cn(
+                "w-6 h-6",
+                scheduleType === "now" ? "text-foreground" : "text-default-500",
+              )}
+            />
+            <span
+              className={cn(
+                "text-sm font-medium",
+                scheduleType === "now" ? "text-foreground" : "text-default-500",
+              )}
+            >
               Publicar ahora
             </span>
           </CardBody>
@@ -43,15 +58,31 @@ export default function StepSchedule({
 
         <Card
           isPressable
-          onPress={() => handleChange("scheduleType", "schedule")}
           className={cn(
             "flex-1 border-2 transition-all duration-200 h-32",
-            scheduleType === "schedule" ? "border-black dark:border-white shadow-md" : "border-transparent hover:border-default-200"
+            scheduleType === "schedule"
+              ? "border-black dark:border-white shadow-md"
+              : "border-transparent hover:border-default-200",
           )}
+          onPress={() => handleChange("scheduleType", "schedule")}
         >
           <CardBody className="flex flex-col items-center justify-center gap-2">
-            <Calendar className={cn("w-6 h-6", scheduleType === "schedule" ? "text-foreground" : "text-default-500")} />
-            <span className={cn("text-sm font-medium", scheduleType === "schedule" ? "text-foreground" : "text-default-500")}>
+            <Calendar
+              className={cn(
+                "w-6 h-6",
+                scheduleType === "schedule"
+                  ? "text-foreground"
+                  : "text-default-500",
+              )}
+            />
+            <span
+              className={cn(
+                "text-sm font-medium",
+                scheduleType === "schedule"
+                  ? "text-foreground"
+                  : "text-default-500",
+              )}
+            >
               Programar
             </span>
           </CardBody>
@@ -65,12 +96,12 @@ export default function StepSchedule({
               FECHA DE LANZAMIENTO
             </span>
             <DatePicker
-              label="Fecha de lanzamiento"
               hideTimeZone
               showMonthAndYearPickers
-              variant="bordered"
               className="max-w-xs"
+              label="Fecha de lanzamiento"
               value={formData.scheduledDate}
+              variant="bordered"
               onChange={(date) => handleChange("scheduledDate", date)}
             />
           </div>
@@ -80,8 +111,8 @@ export default function StepSchedule({
             </span>
             <TimeInput
               label="Hora"
-              variant="bordered"
               value={formData.scheduledTime}
+              variant="bordered"
               onChange={(time) => handleChange("scheduledTime", time)}
             />
           </div>

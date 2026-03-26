@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import React, { JSX } from 'react';
-import { motion } from 'framer-motion';
-
-import { useFormStore } from '@/lib/store/form';
-import { useCurrentStep } from '@/lib/store/form';
+import React, { JSX } from "react";
+import { motion } from "framer-motion";
 
 import { FormStepperProps } from "./types";
-import StepContent from './components/stepContent';
-import StepIndicator from './components/stepIndicator';
-import { constants } from './constants';
-import StepFooter from './components/stepFooter';
+import StepContent from "./components/stepContent";
+import StepIndicator from "./components/stepIndicator";
+import { constants } from "./constants";
+import StepFooter from "./components/stepFooter";
+
+import { useCurrentStep } from "@/lib/store/form";
+import { useFormStore } from "@/lib/store/form";
 
 export function FormStepper(props: FormStepperProps): JSX.Element {
   const { steps, onComplete, provider } = props;
@@ -25,17 +25,19 @@ export function FormStepper(props: FormStepperProps): JSX.Element {
       <StepIndicator steps={steps} />
       <motion.div
         key={currentStep}
-        className='h-full w-full relative'
+        className="h-full w-full relative"
         transition={{ duration: 0.2 }}
         {...constants[animation]}
       >
-        <StepContent stepConfig={currentStepConfig} onComplete={onComplete} provider={provider} />
-        <div className='w-full flex justify-between bottom-0 bg-background z-10 py-3'>
+        <StepContent
+          provider={provider}
+          stepConfig={currentStepConfig}
+          onComplete={onComplete}
+        />
+        <div className="w-full flex justify-between bottom-0 bg-background z-10 py-3">
           <StepFooter onComplete={onComplete} />
         </div>
       </motion.div>
     </div>
   );
 }
-
-

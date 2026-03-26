@@ -6,18 +6,16 @@ import { Card, CardBody, CardHeader } from "@heroui/card";
 import { Chip } from "@heroui/chip";
 import { Avatar } from "@heroui/avatar";
 import { Image } from "@heroui/image";
-import { StepComponentProps } from "@/components/formStepper/types";
 import { MapPin, Calendar, Globe } from "lucide-react";
 
-export default function StepReview({
-  formData,
-}: StepComponentProps) {
+import { StepComponentProps } from "@/components/formStepper/types";
 
+export default function StepReview({ formData }: StepComponentProps) {
   // Create preview tabs based on selected strategy/channels or defaults
   // For demo purposes, hardcoding IG and TikTok
   const platforms = [
     { id: "instagram", label: "Instagram" },
-    { id: "tiktok", label: "TikTok" }
+    { id: "tiktok", label: "TikTok" },
   ];
 
   return (
@@ -26,25 +24,39 @@ export default function StepReview({
       <div className="w-1/2 h-full flex flex-col gap-6 overflow-y-auto pr-2">
         <div>
           <h3 className="text-xl font-bold mb-1">Revisión</h3>
-          <p className="text-default-500 text-sm">Verifica los detalles antes de publicar.</p>
+          <p className="text-default-500 text-sm">
+            Verifica los detalles antes de publicar.
+          </p>
         </div>
 
         <section className="space-y-2">
-          <h4 className="text-xs font-semibold uppercase text-default-500">FORMATO</h4>
-          <div className="text-foreground capitalize font-medium">{formData.format || "No seleccionado"}</div>
+          <h4 className="text-xs font-semibold uppercase text-default-500">
+            FORMATO
+          </h4>
+          <div className="text-foreground capitalize font-medium">
+            {formData.format || "No seleccionado"}
+          </div>
         </section>
 
         <section className="space-y-2">
-          <h4 className="text-xs font-semibold uppercase text-default-500">DESCRIPCIÓN</h4>
-          <p className="text-foreground text-sm whitespace-pre-wrap">{formData.description || "Sin descripción"}</p>
+          <h4 className="text-xs font-semibold uppercase text-default-500">
+            DESCRIPCIÓN
+          </h4>
+          <p className="text-foreground text-sm whitespace-pre-wrap">
+            {formData.description || "Sin descripción"}
+          </p>
         </section>
 
         <section className="space-y-2">
-          <h4 className="text-xs font-semibold uppercase text-default-500">HASHTAGS</h4>
+          <h4 className="text-xs font-semibold uppercase text-default-500">
+            HASHTAGS
+          </h4>
           <div className="flex flex-wrap gap-2">
             {formData.hashtags && formData.hashtags.length > 0 ? (
               formData.hashtags.map((tag: string) => (
-                <Chip key={tag} size="sm" variant="flat" color="secondary">#{tag}</Chip>
+                <Chip key={tag} color="secondary" size="sm" variant="flat">
+                  #{tag}
+                </Chip>
               ))
             ) : (
               <span className="text-sm text-default-400">Sin hashtags</span>
@@ -53,43 +65,57 @@ export default function StepReview({
         </section>
 
         <section className="space-y-2">
-          <h4 className="text-xs font-semibold uppercase text-default-500">UBICACIÓN</h4>
+          <h4 className="text-xs font-semibold uppercase text-default-500">
+            UBICACIÓN
+          </h4>
           <div className="flex items-center gap-2 text-sm text-foreground">
-            <MapPin size={16} className="text-default-500" />
+            <MapPin className="text-default-500" size={16} />
             {formData.location || "No añadida"}
           </div>
         </section>
 
         <section className="space-y-2">
-          <h4 className="text-xs font-semibold uppercase text-default-500">DISTRIBUCIÓN</h4>
+          <h4 className="text-xs font-semibold uppercase text-default-500">
+            DISTRIBUCIÓN
+          </h4>
           <div className="flex items-center gap-2 text-sm text-foreground">
-            <Globe size={16} className="text-default-500" />
-            {formData.strategy === "global" ? "Estrategia Global" : formData.strategy === "visuals" ? "Solo Visuales" : "Selección Manual"}
+            <Globe className="text-default-500" size={16} />
+            {formData.strategy === "global"
+              ? "Estrategia Global"
+              : formData.strategy === "visuals"
+                ? "Solo Visuales"
+                : "Selección Manual"}
           </div>
         </section>
 
         <section className="space-y-2">
-          <h4 className="text-xs font-semibold uppercase text-default-500">PROGRAMACIÓN</h4>
+          <h4 className="text-xs font-semibold uppercase text-default-500">
+            PROGRAMACIÓN
+          </h4>
           <div className="flex items-center gap-2 text-sm text-foreground">
-            <Calendar size={16} className="text-default-500" />
-            {formData.scheduleType === "schedule" ? "Programado" : "Publicar Ahora"}
+            <Calendar className="text-default-500" size={16} />
+            {formData.scheduleType === "schedule"
+              ? "Programado"
+              : "Publicar Ahora"}
           </div>
         </section>
       </div>
 
       {/* Right: Preview */}
       <div className="w-1/2 h-full bg-default-50 rounded-xl p-4 flex flex-col">
-        <h4 className="text-xs font-semibold uppercase text-default-500 mb-4 text-center">VISTA PREVIA DE LA PUBLICACIÓN</h4>
+        <h4 className="text-xs font-semibold uppercase text-default-500 mb-4 text-center">
+          VISTA PREVIA DE LA PUBLICACIÓN
+        </h4>
         <Tabs
-          aria-label="Platform Previews"
           fullWidth
-          size="sm"
+          aria-label="Platform Previews"
           classNames={{
             tabList: "bg-background shadow-none",
-            panel: "flex-1 flex justify-center items-center mt-4"
+            panel: "flex-1 flex justify-center items-center mt-4",
           }}
+          size="sm"
         >
-          {platforms.map(platform => (
+          {platforms.map((platform) => (
             <Tab key={platform.id} title={platform.label}>
               <Card className="w-[280px] shadow-lg border border-default-100">
                 <CardHeader className="flex gap-3">
@@ -104,12 +130,17 @@ export default function StepReview({
                     {/* Placeholder for uploaded image */}
                     {formData.media && formData.media.length > 0 ? (
                       <Image
-                        classNames={{ wrapper: "w-full h-full", img: "object-cover w-full h-full" }}
-                        src={URL.createObjectURL(formData.media[0].file)} // Caution: FilePond file handling might differ
                         alt="Preview"
+                        classNames={{
+                          wrapper: "w-full h-full",
+                          img: "object-cover w-full h-full",
+                        }}
+                        src={URL.createObjectURL(formData.media[0].file)} // Caution: FilePond file handling might differ
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-default-400">Media Preview</div>
+                      <div className="w-full h-full flex items-center justify-center text-default-400">
+                        Media Preview
+                      </div>
                     )}
                   </div>
                   <p className="text-sm line-clamp-2">

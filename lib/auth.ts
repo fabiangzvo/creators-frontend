@@ -12,7 +12,7 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [nextCookies(), instagram()],
+  plugins: [nextCookies(), instagram() as any],
   socialProviders: {
     facebook: {
       enabled: true,
@@ -33,7 +33,7 @@ export const auth = betterAuth({
               client_id: process.env.FB_CLIENT_ID!,
               client_secret: process.env.FB_CLIENT_SECRET!,
               fb_exchange_token: token!,
-            })
+            }),
         );
 
         const data = await res.json();
@@ -68,7 +68,9 @@ export const auth = betterAuth({
         });
 
         const data = await res.json();
+
         console.log("asdasd", data);
+
         return {
           accessToken: data.access_token,
           refreshToken: data.refresh_token,

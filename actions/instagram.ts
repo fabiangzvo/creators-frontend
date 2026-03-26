@@ -5,7 +5,7 @@ import { ListOption } from "@/components/formStepper/types";
 import { ChannelCardProps } from "@/components/facebookForm/components/channelCard/types";
 
 export async function getAccountInfo(
-  access_token: string
+  access_token: string,
 ): Promise<InstagramPageInfo> {
   try {
     const response = await axios.get<InstagramPageInfo>(
@@ -16,7 +16,7 @@ export async function getAccountInfo(
           fields:
             "id,username,account_type,media_count,name,profile_picture_url,followers_count,biography,website",
         },
-      }
+      },
     );
 
     return response.data as InstagramPageInfo;
@@ -29,7 +29,7 @@ export async function getAccountInfo(
 }
 
 export async function getInstagramAccount(
-  accessToken: string
+  accessToken: string,
 ): Promise<string | ListOption[]> {
   const data = await getAccountInfo(accessToken);
 
@@ -46,7 +46,7 @@ export async function getInstagramAccount(
 }
 
 export async function getInstagramChannelProps(
-  accessToken: string
+  accessToken: string,
 ): Promise<ChannelCardProps> {
   const data = await getAccountInfo(accessToken);
 

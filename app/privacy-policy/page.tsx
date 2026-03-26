@@ -14,9 +14,9 @@ export default function PrivacyPolicyPage() {
 
         <section className="space-y-4 text-gray-700">
           <p>
-            En <strong>Tu Empresa</strong>, valoramos y respetamos tu privacidad.
-            Esta Política de Privacidad describe cómo recopilamos, usamos y
-            protegemos tu información personal cuando utilizas nuestra
+            En <strong>Tu Empresa</strong>, valoramos y respetamos tu
+            privacidad. Esta Política de Privacidad describe cómo recopilamos,
+            usamos y protegemos tu información personal cuando utilizas nuestra
             plataforma.
           </p>
 
@@ -33,9 +33,9 @@ export default function PrivacyPolicyPage() {
             2. Uso de la información
           </h2>
           <p>
-            Utilizamos la información recopilada para operar, mantener y
-            mejorar nuestros servicios, así como para ofrecer integraciones y
-            soporte personalizado.
+            Utilizamos la información recopilada para operar, mantener y mejorar
+            nuestros servicios, así como para ofrecer integraciones y soporte
+            personalizado.
           </p>
 
           <h2 className="text-xl font-semibold text-gray-900">
@@ -52,8 +52,8 @@ export default function PrivacyPolicyPage() {
           </h2>
           <p>
             Implementamos medidas de seguridad técnicas y organizativas para
-            proteger tu información contra accesos no autorizados, pérdida o
-            uso indebido.
+            proteger tu información contra accesos no autorizados, pérdida o uso
+            indebido.
           </p>
 
           <h2 className="text-xl font-semibold text-gray-900">

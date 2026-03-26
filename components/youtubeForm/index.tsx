@@ -1,9 +1,7 @@
-import { JSX } from 'react'
+import { JSX } from "react";
 
 function YoutubeForm(): JSX.Element {
-  return (
-    <div className="container">YoutubeForm</div>
-  )
+  return <div className="container">YoutubeForm</div>;
 }
 
-export default YoutubeForm
+export default YoutubeForm;

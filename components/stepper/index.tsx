@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { type ComponentProps, forwardRef, useMemo } from 'react'
-import { useControlledState } from '@react-stately/utils'
-import { m, LazyMotion, domAnimation } from 'framer-motion'
-import { twMerge } from 'tailwind-merge'
+import type { StepperProps } from "./types";
 
-import type { StepperProps } from './types'
+import { type ComponentProps, forwardRef, useMemo } from "react";
+import { useControlledState } from "@react-stately/utils";
+import { m, LazyMotion, domAnimation } from "framer-motion";
+import { twMerge } from "tailwind-merge";
 
-function CheckIcon(props: ComponentProps<'svg'>) {
+function CheckIcon(props: ComponentProps<"svg">) {
   return (
     <svg
       {...props}
@@ -24,19 +24,19 @@ function CheckIcon(props: ComponentProps<'svg'>) {
         strokeLinejoin="round"
         transition={{
           delay: 0.2,
-          type: 'tween',
-          ease: 'easeOut',
+          type: "tween",
+          ease: "easeOut",
           duration: 0.3,
         }}
       />
     </svg>
-  )
+  );
 }
 
 const Stepper = forwardRef<HTMLButtonElement, StepperProps>(
   (
     {
-      color = 'primary',
+      color = "primary",
       steps = [],
       defaultStep = 0,
       onStepChange,
@@ -46,66 +46,68 @@ const Stepper = forwardRef<HTMLButtonElement, StepperProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [currentStep, setCurrentStep] = useControlledState(
       currentStepProp,
       defaultStep,
-      onStepChange
-    )
+      onStepChange,
+    );
 
     const colors = useMemo(() => {
-      let userColor
-      let fgColor
+      let userColor;
+      let fgColor;
 
       const colorsVars = [
-        '[--active-fg-color:var(--step-fg-color)]',
-        '[--active-border-color:var(--step-color)]',
-        '[--active-color:var(--step-color)]',
-        '[--complete-background-color:var(--step-color)]',
-        '[--complete-border-color:var(--step-color)]',
-        '[--inactive-border-color:hsl(var(--heroui-default-400))]',
-        '[--inactive-color:hsl(var(--heroui-default-400))]',
-      ]
+        "[--active-fg-color:var(--step-fg-color)]",
+        "[--active-border-color:var(--step-color)]",
+        "[--active-color:var(--step-color)]",
+        "[--complete-background-color:var(--step-color)]",
+        "[--complete-border-color:var(--step-color)]",
+        "[--inactive-border-color:hsl(var(--heroui-default-400))]",
+        "[--inactive-color:hsl(var(--heroui-default-400))]",
+      ];
 
       switch (color) {
-        case 'primary':
-          userColor = '[--step-color:hsl(var(--heroui-primary))]'
-          fgColor = '[--step-fg-color:hsl(var(--heroui-primary-foreground))]'
-          break
-        case 'secondary':
-          userColor = '[--step-color:hsl(var(--heroui-secondary))]'
-          fgColor = '[--step-fg-color:hsl(var(--heroui-secondary-foreground))]'
-          break
-        case 'success':
-          userColor = '[--step-color:hsl(var(--heroui-success))]'
-          fgColor = '[--step-fg-color:hsl(var(--heroui-success-foreground))]'
-          break
-        case 'warning':
-          userColor = '[--step-color:hsl(var(--heroui-warning))]'
-          fgColor = '[--step-fg-color:hsl(var(--heroui-warning-foreground))]'
-          break
-        case 'danger':
-          userColor = '[--step-color:hsl(var(--heroui-error))]'
-          fgColor = '[--step-fg-color:hsl(var(--heroui-error-foreground))]'
-          break
-        case 'default':
-          userColor = '[--step-color:hsl(var(--heroui-default))]'
-          fgColor = '[--step-fg-color:hsl(var(--heroui-default-foreground))]'
-          break
+        case "primary":
+          userColor = "[--step-color:hsl(var(--heroui-primary))]";
+          fgColor = "[--step-fg-color:hsl(var(--heroui-primary-foreground))]";
+          break;
+        case "secondary":
+          userColor = "[--step-color:hsl(var(--heroui-secondary))]";
+          fgColor = "[--step-fg-color:hsl(var(--heroui-secondary-foreground))]";
+          break;
+        case "success":
+          userColor = "[--step-color:hsl(var(--heroui-success))]";
+          fgColor = "[--step-fg-color:hsl(var(--heroui-success-foreground))]";
+          break;
+        case "warning":
+          userColor = "[--step-color:hsl(var(--heroui-warning))]";
+          fgColor = "[--step-fg-color:hsl(var(--heroui-warning-foreground))]";
+          break;
+        case "danger":
+          userColor = "[--step-color:hsl(var(--heroui-error))]";
+          fgColor = "[--step-fg-color:hsl(var(--heroui-error-foreground))]";
+          break;
+        case "default":
+          userColor = "[--step-color:hsl(var(--heroui-default))]";
+          fgColor = "[--step-fg-color:hsl(var(--heroui-default-foreground))]";
+          break;
         default:
-          userColor = '[--step-color:hsl(var(--heroui-primary))]'
-          fgColor = '[--step-fg-color:hsl(var(--heroui-primary-foreground))]'
-          break
+          userColor = "[--step-color:hsl(var(--heroui-primary))]";
+          fgColor = "[--step-fg-color:hsl(var(--heroui-primary-foreground))]";
+          break;
       }
 
-      if (!className?.includes('--step-fg-color')) colorsVars.unshift(fgColor)
-      if (!className?.includes('--step-color')) colorsVars.unshift(userColor)
-      if (!className?.includes('--inactive-bar-color'))
-        colorsVars.push('[--inactive-bar-color:hsl(var(--heroui-default-400))]')
+      if (!className?.includes("--step-fg-color")) colorsVars.unshift(fgColor);
+      if (!className?.includes("--step-color")) colorsVars.unshift(userColor);
+      if (!className?.includes("--inactive-bar-color"))
+        colorsVars.push(
+          "[--inactive-bar-color:hsl(var(--heroui-default-400))]",
+        );
 
-      return colorsVars
-    }, [color, className])
+      return colorsVars;
+    }, [color, className]);
 
     return (
       <nav
@@ -114,18 +116,18 @@ const Stepper = forwardRef<HTMLButtonElement, StepperProps>(
       >
         <ol
           className={twMerge(
-            'flex flex-row flex-nowrap gap-x-3',
+            "flex flex-row flex-nowrap gap-x-3",
             colors,
-            className
+            className,
           )}
         >
           {steps?.map((step, stepIdx) => {
             let status =
               currentStep === stepIdx
-                ? 'active'
+                ? "active"
                 : currentStep < stepIdx
-                  ? 'inactive'
-                  : 'complete'
+                  ? "inactive"
+                  : "complete";
 
             return (
               <li
@@ -135,10 +137,10 @@ const Stepper = forwardRef<HTMLButtonElement, StepperProps>(
                 <button
                   key={stepIdx}
                   ref={ref}
-                  aria-current={status === 'active' ? 'step' : undefined}
+                  aria-current={status === "active" ? "step" : undefined}
                   className={twMerge(
-                    'group flex w-full cursor-pointer flex-row items-center justify-center gap-x-3 rounded-large py-2.5',
-                    stepClassName
+                    "group flex w-full cursor-pointer flex-row items-center justify-center gap-x-3 rounded-large py-2.5",
+                    stepClassName,
                   )}
                   onClick={() => onStepChange && setCurrentStep(stepIdx)}
                   {...props}
@@ -149,32 +151,32 @@ const Stepper = forwardRef<HTMLButtonElement, StepperProps>(
                         <m.div animate={status} className="relative">
                           <m.div
                             className={twMerge(
-                              'relative flex h-[34px] w-[34px] items-center justify-center rounded-full border-medium text-large font-semibold text-default-foreground',
-                              status === 'complete' && 'shadow-lg'
+                              "relative flex h-[34px] w-[34px] items-center justify-center rounded-full border-medium text-large font-semibold text-default-foreground",
+                              status === "complete" && "shadow-lg",
                             )}
                             initial={false}
                             transition={{ duration: 0.25 }}
                             variants={{
                               inactive: {
-                                backgroundColor: 'transparent',
-                                borderColor: 'var(--complete-border-color)',
-                                color: 'var(--active-color)',
+                                backgroundColor: "transparent",
+                                borderColor: "var(--complete-border-color)",
+                                color: "var(--active-color)",
                               },
                               active: {
                                 backgroundColor:
-                                  'var(--complete-background-color)',
-                                borderColor: 'var(--complete-border-color)',
-                                color: 'var(--active-fg-color)',
+                                  "var(--complete-background-color)",
+                                borderColor: "var(--complete-border-color)",
+                                color: "var(--active-fg-color)",
                               },
                               complete: {
                                 backgroundColor:
-                                  'var(--complete-background-color)',
-                                borderColor: 'var(--complete-border-color)',
+                                  "var(--complete-background-color)",
+                                borderColor: "var(--complete-border-color)",
                               },
                             }}
                           >
                             <div className="flex items-center justify-center">
-                              {status === 'complete' ? (
+                              {status === "complete" ? (
                                 <CheckIcon className="h-6 w-6 text-[var(--active-fg-color)]" />
                               ) : (
                                 <span>{stepIdx + 1}</span>
@@ -187,8 +189,8 @@ const Stepper = forwardRef<HTMLButtonElement, StepperProps>(
                     <div className="flex-1 text-center">
                       <div
                         className={twMerge(
-                          'text-small font-medium text-default-500 transition-[color,opacity] duration-300 group-active:opacity-80 lg:text-medium flex flex-col',
-                          status === 'inactive' && 'text-default-foreground'
+                          "text-small font-medium text-default-500 transition-[color,opacity] duration-300 group-active:opacity-80 lg:text-medium flex flex-col",
+                          status === "inactive" && "text-default-foreground",
                         )}
                       >
                         {step.title}
@@ -202,28 +204,28 @@ const Stepper = forwardRef<HTMLButtonElement, StepperProps>(
                       className="pointer-events-none absolute right-0 w-10 flex-none items-center"
                       style={{
                         // @ts-ignore
-                        '--idx': stepIdx,
+                        "--idx": stepIdx,
                       }}
                     >
                       <div
                         className={twMerge(
-                          'relative h-0.5 w-full bg-[var(--inactive-bar-color)] transition-colors duration-300',
+                          "relative h-0.5 w-full bg-[var(--inactive-bar-color)] transition-colors duration-300",
                           "after:absolute after:block after:h-full after:w-0 after:bg-[var(--active-border-color)] after:transition-[width] after:duration-300 after:content-['']",
-                          stepIdx < currentStep && 'after:w-full'
+                          stepIdx < currentStep && "after:w-full",
                         )}
                       />
                     </div>
                   )}
                 </button>
               </li>
-            )
+            );
           })}
         </ol>
       </nav>
-    )
-  }
-)
+    );
+  },
+);
 
-Stepper.displayName = 'Stepper'
+Stepper.displayName = "Stepper";
 
-export default Stepper
+export default Stepper;
