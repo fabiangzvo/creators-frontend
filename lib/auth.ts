@@ -12,7 +12,7 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [nextCookies(), instagram() as BetterAuthPlugin],
+  plugins: [nextCookies(), instagram() as any],
   socialProviders: {
     facebook: {
       enabled: true,
@@ -68,7 +68,7 @@ export const auth = betterAuth({
         });
 
         const data = await res.json();
-        console.log("asdasd", data);
+
         return {
           accessToken: data.access_token,
           refreshToken: data.refresh_token,

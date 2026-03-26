@@ -12,7 +12,7 @@ export async function generateVideo(
     });
 
     while (!operation.done) {
-      console.log("Generando video... esperando 20 segundos.");
+      console.warn("Generando video... esperando 20 segundos.");
       await new Promise((resolve) => setTimeout(resolve, 20000));
 
       operation = await ai.operations.getVideosOperation({

@@ -1,6 +1,7 @@
+import ConfirmationStep from "./components/confirmationStep";
+
 import { validators } from "@/components/formStepper/validators";
 import { StepConfig, FieldType } from "@/components/formStepper/types";
-import ConfirmationStep from "./components/confirmationStep";
 
 export const FIELD_LIST: StepConfig[] = [
   {

@@ -23,34 +23,26 @@ export default function StepSchedule({
     <div className="flex flex-col w-full max-w-3xl mx-auto gap-8 py-8 items-center">
       <div className="flex gap-6 w-full max-w-2xl">
         <Button
+          className={cn("flex-1 border-2 transition-all duration-200 h-32")}
           color="primary"
           variant={scheduleType === "now" ? "solid" : "bordered"}
           onPress={() => handleChange("scheduleType", "now")}
-          className={cn(
-            "flex-1 border-2 transition-all duration-200 h-32",
-          )}
         >
           <CardBody className="flex flex-col items-center justify-center gap-2">
             <Zap className="w-10 h-10" />
-            <span className="text-base font-medium">
-              Publicar ahora
-            </span>
+            <span className="text-base font-medium">Publicar ahora</span>
           </CardBody>
         </Button>
 
         <Button
+          className={cn("flex-1 border-2 transition-all duration-200 h-32")}
           color="primary"
           variant={scheduleType === "schedule" ? "solid" : "bordered"}
           onPress={() => handleChange("scheduleType", "schedule")}
-          className={cn(
-            "flex-1 border-2 transition-all duration-200 h-32",
-          )}
         >
           <CardBody className="flex flex-col items-center justify-center gap-2">
             <Calendar className="w-10 h-10" />
-            <span className="text-base font-medium">
-              Programar
-            </span>
+            <span className="text-base font-medium">Programar</span>
           </CardBody>
         </Button>
       </div>
@@ -59,13 +51,13 @@ export default function StepSchedule({
         <div className="w-full max-w-2xl flex gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex-1 space-y-2">
             <DatePicker
-              label="Fecha de lanzamiento"
               hideTimeZone
               showMonthAndYearPickers
-              variant="bordered"
-              labelPlacement="outside"
               className="max-w-xs"
+              label="Fecha de lanzamiento"
+              labelPlacement="outside"
               value={formData.scheduledDate}
+              variant="bordered"
               onChange={(date) => handleChange("scheduledDate", date)}
             />
           </div>
@@ -73,8 +65,8 @@ export default function StepSchedule({
             <TimeInput
               label="Hora"
               labelPlacement="outside"
-              variant="bordered"
               value={formData.scheduledTime}
+              variant="bordered"
               onChange={(time) => handleChange("scheduledTime", time)}
             />
           </div>

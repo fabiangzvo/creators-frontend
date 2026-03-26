@@ -7,17 +7,18 @@ function Posts(): JSX.Element {
   return (
     <div className="container flex flex-col pt-2 h-full">
       <Banner
-        title="Publicaciones"
         description="Explora las publicaciones que has creado en los diferentes canales creados."
-        link='/posts/create'
+        link="/posts/create"
+        title="Publicaciones"
       />
       <EmptyPostMessage
-        label="Todavía no has creado ninguna publicación."
-        linkLabel="¡Crea publicación!"
-        link="/posts/create"
         containerClassName="my-6"
+        label="Todavía no has creado ninguna publicación."
+        link="/posts/create"
+        linkLabel="¡Crea publicación!"
       />
-    </div>);
+    </div>
+  );
 }
 
 export default Posts;

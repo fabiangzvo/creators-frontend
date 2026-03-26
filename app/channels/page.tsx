@@ -8,9 +8,7 @@ export const metadata = {
 };
 
 async function Channels(): Promise<JSX.Element> {
-  return (
-    <ChannelExplorer />
-  );
+  return <ChannelExplorer />;
 }
 
 export default Channels;

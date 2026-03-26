@@ -1,6 +1,4 @@
-import {
-  Globe,
-} from "lucide-react";
+import { Globe } from "lucide-react";
 
 import { FacebookIcon } from "../../../icons/facebook";
 import { InstagramIcon } from "../../../icons/instagram";

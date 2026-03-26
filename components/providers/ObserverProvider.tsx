@@ -1,10 +1,10 @@
-import  { useContext, createContext, ComponentType } from 'react'
+import { useContext, createContext, ComponentType } from "react";
 
-const ObserverContext = createContext<Record<string, any>>({})
+const ObserverContext = createContext<Record<string, any>>({});
 
-const ObserverProvider = ObserverContext.Provider 
+const ObserverProvider = ObserverContext.Provider;
 
-const useObserver = () => useContext(ObserverContext)
+const useObserver = () => useContext(ObserverContext);
 
 function ObserverConsumer(Component: ComponentType) {
   return function Wrapper(props: any) {
@@ -12,8 +12,8 @@ function ObserverConsumer(Component: ComponentType) {
       <ObserverContext.Consumer>
         {(value) => <Component {...props} observer={value} />}
       </ObserverContext.Consumer>
-    )
-  }
+    );
+  };
 }
 
-export { useObserver, ObserverConsumer, ObserverProvider }
+export { useObserver, ObserverConsumer, ObserverProvider };

@@ -1,9 +1,10 @@
-import { StepConfig } from "@/components/formStepper/types";
 import StepFormat from "./components/stepFormat";
 import StepDetails from "./components/stepDetails";
 import StepDistribution from "./components/stepDistribution";
 import StepSchedule from "./components/stepSchedule";
 import StepReview from "./components/stepReview";
+
+import { StepConfig } from "@/components/formStepper/types";
 
 export const createPostSteps: StepConfig[] = [
   {

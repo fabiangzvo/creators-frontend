@@ -1,20 +1,20 @@
 "use client";
 
-import { FormStepper } from '@/components/formStepper'
-import { createPostSteps } from '@/components/createPost'
+import { FormStepper } from "@/components/formStepper";
+import { createPostSteps } from "@/components/createPost";
 
 function Page() {
   return (
     <div className="container flex flex-col pt-2 h-full">
       <FormStepper
+        provider="instagram"
         steps={createPostSteps}
         onComplete={async (data) => {
-          console.log("Completed:", data);
+          console.warn("Completed:", data);
         }}
-        provider="instagram"
       />
     </div>
-  )
+  );
 }
 
-export default Page
+export default Page;
