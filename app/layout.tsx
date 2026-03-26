@@ -3,18 +3,18 @@ import "@/styles/globals.css";
 import { PropsWithChildren, type JSX } from "react";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
-import 'dayjs/locale/es'
+import "dayjs/locale/es";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
-import VerticalSidebar from '@/components/verticalSidebar';
+import VerticalSidebar from "@/components/verticalSidebar";
 
-dayjs.locale('es')
+dayjs.locale("es");
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +35,9 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: PropsWithChildren): JSX.Element {
+export default function RootLayout({
+  children,
+}: PropsWithChildren): JSX.Element {
   return (
     <html suppressHydrationWarning lang="en">
       <head />

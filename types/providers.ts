@@ -20,11 +20,11 @@ export type ProvidersComponentMap<T = any> = Record<
 >;
 
 export type FetchAllowedAccountsFunc = (
-  accessToken: string
+  accessToken: string,
 ) => Promise<string | ListOption[]>;
 
 export type ProvidersWithDetailFetchFunc = (
-  accessToken: string
+  accessToken: string,
 ) => Promise<ChannelCardProps>;
 
 export interface FormProviderProps {

@@ -4,11 +4,11 @@ import { apiIntegration } from "@/lib/axios";
 import { Integration, IntegrationBody } from "@/types/integrations";
 
 export async function deleteIntegration(
-  integrationId: string
+  integrationId: string,
 ): Promise<boolean> {
   try {
     const response = await apiIntegration.delete(
-      `/integrations/${integrationId}`
+      `/integrations/${integrationId}`,
     );
 
     return response.status === 200;
@@ -22,7 +22,7 @@ export async function deleteIntegration(
 export async function changeStatus(integrationId: string): Promise<boolean> {
   try {
     const response = await apiIntegration.put(
-      `/integrations/${integrationId}/status`
+      `/integrations/${integrationId}/status`,
     );
 
     return response.status === 200;
@@ -46,7 +46,7 @@ export async function createIntegration(data: IntegrationBody): Promise<any> {
 }
 
 export async function getIntegrationById(
-  integrationId: string
+  integrationId: string,
 ): Promise<Integration | null> {
   try {
     const response = await apiIntegration.get(`/integrations/${integrationId}`);

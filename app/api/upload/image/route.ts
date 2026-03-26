@@ -15,6 +15,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   if (metadata) {
     const imageData = JSON.parse(metadata.toString());
+
     console.log("Metadata FilePond:", imageData);
   }
 
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     response.headers.set("Content-Type", result.headers.get("Content-Type")!);
     response.headers.set(
       "Content-Disposition",
-      result.headers.get("Content-Disposition")!
+      result.headers.get("Content-Disposition")!,
     );
   }
 

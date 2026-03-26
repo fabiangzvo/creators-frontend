@@ -1,9 +1,7 @@
-import { JSX } from 'react'
+import { JSX } from "react";
 
 function TiktokForm(): JSX.Element {
-  return (
-    <div className="container">TiktokForm</div>
-  )
+  return <div className="container">TiktokForm</div>;
 }
 
-export default TiktokForm
+export default TiktokForm;

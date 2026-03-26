@@ -3,20 +3,33 @@
 import { JSX, useMemo } from "react";
 import { Pagination } from "@heroui/pagination";
 
-import { Integration } from "@/types/integrations";
-
 import Loader from "../loader";
+
 import EmptyMessage from "./components/emptyMessage";
 import ChannelCard from "./components/channelCard";
-import { ChannelListProps } from "./types"
+import { ChannelListProps } from "./types";
 import ErrorMessage from "./components/errorMessage";
 
-function ChannelList(props: ChannelListProps): JSX.Element {
-  const { data, count, limit, mutate, handlePageChange, isLoading, isError = false } = props;
+import { Integration } from "@/types/integrations";
 
-  const cards = useMemo(() => data?.map(
-    (integration: Integration) => <ChannelCard key={integration.id} refresh={mutate} {...integration} />),
-    [data]);
+function ChannelList(props: ChannelListProps): JSX.Element {
+  const {
+    data,
+    count,
+    limit,
+    mutate,
+    handlePageChange,
+    isLoading,
+    isError = false,
+  } = props;
+
+  const cards = useMemo(
+    () =>
+      data?.map((integration: Integration) => (
+        <ChannelCard key={integration.id} refresh={mutate} {...integration} />
+      )),
+    [data],
+  );
 
   if (isLoading) return <Loader />;
 
@@ -26,9 +39,10 @@ function ChannelList(props: ChannelListProps): JSX.Element {
     return (
       <EmptyMessage
         label="Todavía no has conectado ningún canal."
-        linkLabel="¡Crea una integración para empezar!"
         link="/channels/create"
-      />);
+        linkLabel="¡Crea una integración para empezar!"
+      />
+    );
 
   return (
     <div className="container flex flex-col gap-6 items-center h-full">

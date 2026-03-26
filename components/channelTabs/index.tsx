@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { JSX } from 'react'
+import { JSX } from "react";
 import { Tabs, Tab } from "@heroui/tabs";
 
-import { Providers } from "@/types/providers";
-
 import GeneralTab from "./components/generalTab";
-import PostTab from './components/postsTab';
-import SettingTab from './components/settingsTab';
+import PostTab from "./components/postsTab";
+import SettingTab from "./components/settingsTab";
 import { ChannelTabsProps } from "./types";
+
+import { Providers } from "@/types/providers";
 
 function ChannelTabs(props: ChannelTabsProps): JSX.Element {
   const { integration, token } = props;
@@ -17,14 +17,17 @@ function ChannelTabs(props: ChannelTabsProps): JSX.Element {
     <div className="flex w-full flex-col mt-4">
       <Tabs
         aria-label="channel tabs"
-        variant='underlined'
-        color='primary'
-        classNames={{ tabContent: "text-foreground group-data-[selected=true]:font-bold text-base" }}
+        classNames={{
+          tabContent:
+            "text-foreground group-data-[selected=true]:font-bold text-base",
+        }}
+        color="primary"
+        variant="underlined"
       >
         <Tab key="general" aria-label="tab general" title="General">
           <GeneralTab
-            apiKey={integration.apiKey}
             accountId={integration.accountId}
+            apiKey={integration.apiKey}
             description={integration.description}
             provider={integration.provider.name as Providers}
             token={token}
@@ -41,7 +44,7 @@ function ChannelTabs(props: ChannelTabsProps): JSX.Element {
         </Tab>
       </Tabs>
     </div>
-  )
+  );
 }
 
-export default ChannelTabs
+export default ChannelTabs;

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { JSX, useState } from 'react'
+import { JSX, useState } from "react";
 
 import { useFetch } from "@/hooks/useFetch";
 import { Filters } from "@/types/pagination";
@@ -15,44 +15,42 @@ function ChannelExplorer(): JSX.Element {
     limit: 10,
     search: "",
   });
-  const { data:
-    { data = [], count = 0 } = {},
+  const {
+    data: { data = [], count = 0 } = {},
     error,
     isLoading,
-    mutate
-  } = useFetch<PaginatedResponse<Integration>>(
-    "/integrations",
-    {
-      api: "integration",
-      queryParams: {
-        page: filters.page,
-        limit: filters.limit,
-        search: filters.search,
-        filters: {
-          softRemoved: false,
-        }
+    mutate,
+  } = useFetch<PaginatedResponse<Integration>>("/integrations", {
+    api: "integration",
+    queryParams: {
+      page: filters.page,
+      limit: filters.limit,
+      search: filters.search,
+      filters: {
+        softRemoved: false,
       },
-    });
+    },
+  });
 
   return (
     <div className="container flex flex-col pt-2 h-full">
       <Banner
-        title="Canales"
         description="Explora los canales que haz integrado"
-        link='/channels/create'
         handleSearch={(search) => setFilters((prev) => ({ ...prev, search }))}
+        link="/channels/create"
+        title="Canales"
       />
       <ChannelList
-        data={data}
         count={count}
-        limit={filters.limit}
-        mutate={mutate}
-        isLoading={isLoading}
+        data={data}
         handlePageChange={(page) => setFilters((prev) => ({ ...prev, page }))}
         isError={!!error}
+        isLoading={isLoading}
+        limit={filters.limit}
+        mutate={mutate}
       />
     </div>
-  )
+  );
 }
 
-export default ChannelExplorer
+export default ChannelExplorer;

@@ -5,7 +5,7 @@ import { ListOption } from "@/components/formStepper/types";
 import { ChannelCardProps } from "@/components/facebookForm/components/channelCard/types";
 
 export async function getPages(
-  access_token: string
+  access_token: string,
 ): Promise<FacebookPageInfo[]> {
   try {
     const response = await axios.get<{ data: FacebookPageInfo[] }>(
@@ -19,7 +19,7 @@ export async function getPages(
           fields:
             "about,picture{url,cache_key,height,width},app_id,name,category_list,followers_count,phone,website",
         },
-      }
+      },
     );
 
     return response.data.data as FacebookPageInfo[];
@@ -31,7 +31,7 @@ export async function getPages(
 }
 
 export async function getFacebookAccountInfo(
-  accessToken: string
+  accessToken: string,
 ): Promise<string | ListOption[]> {
   const data = await getPages(accessToken);
 
@@ -47,7 +47,7 @@ export async function getFacebookAccountInfo(
 }
 
 export async function getFacebookChannelProps(
-  accessToken: string
+  accessToken: string,
 ): Promise<ChannelCardProps> {
   const data = await getPages(accessToken);
 
