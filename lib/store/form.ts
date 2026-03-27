@@ -13,6 +13,7 @@ import { FieldType, FieldConfig } from "@/components/formStepper/types";
 
 const createInitialFormData = (steps: StepConfig[]): FormDataType => {
   const initialFormData: FormDataType = {};
+
   steps.forEach((step) => {
     if (step.fields) {
       step.fields.forEach((field) => {
@@ -22,6 +23,7 @@ const createInitialFormData = (steps: StepConfig[]): FormDataType => {
       });
     }
   });
+
   return initialFormData;
 };
 
@@ -84,8 +86,10 @@ export const useFormStore = create<FormStore>()(
 
           for (const validation of field.validations) {
             const error = validation(value);
+
             if (error) return error;
           }
+
           return null;
         },
 
@@ -106,8 +110,9 @@ export const useFormStore = create<FormStore>()(
 
             const error = state.validateField(
               field,
-              state.formData[field.name]
+              state.formData[field.name],
             );
+
             if (error) {
               newErrors[field.name] = error;
               isValid = false;
@@ -129,6 +134,7 @@ export const useFormStore = create<FormStore>()(
         // Event handlers
         handleChange: (fieldName: string, value: any) => {
           const state = get();
+
           state.setFormData(fieldName, value);
           // Validate on change only if field was already touched
           if (state.touched[fieldName]) {
@@ -138,6 +144,7 @@ export const useFormStore = create<FormStore>()(
 
             if (field) {
               const error = state.validateField(field, value);
+
               state.setError(fieldName, error);
             }
           }
@@ -145,6 +152,7 @@ export const useFormStore = create<FormStore>()(
 
         handleBlur: (fieldName: string) => {
           const state = get();
+
           state.setTouched(fieldName, true);
 
           const field = state.steps
@@ -153,6 +161,7 @@ export const useFormStore = create<FormStore>()(
 
           if (field) {
             const error = state.validateField(field, state.formData[fieldName]);
+
             state.setError(fieldName, error);
           }
         },
@@ -180,6 +189,7 @@ export const useFormStore = create<FormStore>()(
 
         prevStep: () => {
           const state = get();
+
           if (state.currentStep > 0) {
             state.setCurrentStep(state.currentStep - 1);
             state.setAnimation(AnimationStep.RIGHT);
@@ -188,12 +198,13 @@ export const useFormStore = create<FormStore>()(
 
         goToStep: (step: number) => {
           const state = get();
+
           if (step >= 0 && step < state.steps.length) {
             state.setCurrentStep(step);
             state.setAnimation(
               step > state.currentStep
                 ? AnimationStep.LEFT
-                : AnimationStep.RIGHT
+                : AnimationStep.RIGHT,
             );
           }
         },
@@ -216,9 +227,9 @@ export const useFormStore = create<FormStore>()(
         storage: createJSONStorage(() => localStorage),
         name: "form",
         skipHydration: true,
-      }
-    )
-  )
+      },
+    ),
+  ),
 );
 
 export const useFormData = () => useFormStore((state) => state.formData);

@@ -1,25 +1,21 @@
-import { JSX } from 'react'
+import { JSX } from "react";
 
-import { FormProviderProps } from '@/types/providers'
+import Form from "./components/form";
 
-import Form from './components/form'
+import { FormProviderProps } from "@/types/providers";
 
 async function ChannelForm(props: FormProviderProps): Promise<JSX.Element> {
-  const { accessToken, fetchAllowedAccounts, provider } = props
+  const { accessToken, fetchAllowedAccounts, provider } = props;
 
-  const data = await fetchAllowedAccounts(accessToken)
+  const data = await fetchAllowedAccounts(accessToken);
 
-  if (typeof data === 'string') return <div>{data}</div>
+  if (typeof data === "string") return <div>{data}</div>;
 
   return (
     <div className="px-4">
-      <Form
-        token={accessToken}
-        pages={data}
-        provider={provider}
-      />
+      <Form pages={data} provider={provider} token={accessToken} />
     </div>
-  )
+  );
 }
 
-export default ChannelForm
+export default ChannelForm;

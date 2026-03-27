@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { Chip } from "@heroui/chip";
-import { Sparkles, X } from "lucide-react";
+import { Sparkles } from "lucide-react";
+
 import { StepComponentProps } from "@/components/formStepper/types";
 
 export default function StepDetails({
@@ -17,8 +18,10 @@ export default function StepDetails({
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       const newTag = hashtagInput.trim().replace(/^#/, "");
+
       if (newTag && !formData.hashtags?.includes(newTag)) {
         const currentHashtags = formData.hashtags || [];
+
         handleChange("hashtags", [...currentHashtags, newTag]);
         setHashtagInput("");
       }
@@ -27,9 +30,10 @@ export default function StepDetails({
 
   const removeHashtag = (tagToRemove: string) => {
     const currentHashtags = formData.hashtags || [];
+
     handleChange(
       "hashtags",
-      currentHashtags.filter((tag: string) => tag !== tagToRemove)
+      currentHashtags.filter((tag: string) => tag !== tagToRemove),
     );
   };
 
@@ -38,21 +42,21 @@ export default function StepDetails({
       <div className="space-y-6">
         <div className="space-y-2">
           <Textarea
-            label="Descripción"
-            placeholder="Escribe el pie de foto o usa la IA para inspirarte..."
-            minRows={6}
-            variant="bordered"
-            color="primary"
-            labelPlacement="outside"
-            value={formData.description || ""}
             isClearable
-            onValueChange={(val) => handleChange("description", val)}
+            color="primary"
+            label="Descripción"
+            labelPlacement="outside"
+            minRows={6}
+            placeholder="Escribe el pie de foto o usa la IA para inspirarte..."
+            value={formData.description || ""}
+            variant="bordered"
             onClear={() => handleChange("description", "")}
+            onValueChange={(val) => handleChange("description", val)}
           />
           <div className="flex justify-end">
             <Button
-              size="sm"
               className="bg-purple-600 text-white shadow-lg shadow-purple-500/20"
+              size="sm"
               startContent={<Sparkles size={16} />}
             >
               IA ASISTENTE
@@ -63,23 +67,23 @@ export default function StepDetails({
         <div className="grid grid-cols-2 gap-6">
           <div className="space-y-2">
             <Input
-              label="Hashtags"
-              placeholder="#gaming #lifestyle..."
-              labelPlacement="outside"
-              variant="bordered"
               color="primary"
+              label="Hashtags"
+              labelPlacement="outside"
+              placeholder="#gaming #lifestyle..."
               value={hashtagInput}
-              onValueChange={setHashtagInput}
+              variant="bordered"
               onKeyDown={handleAddHashtag}
+              onValueChange={setHashtagInput}
             />
             <div className="flex flex-wrap gap-2 mt-2">
               {formData.hashtags?.map((tag: string) => (
                 <Chip
                   key={tag}
-                  onClose={() => removeHashtag(tag)}
-                  variant="flat"
-                  color="primary"
                   className="text-lg font-medium"
+                  color="primary"
+                  variant="flat"
+                  onClose={() => removeHashtag(tag)}
                 >
                   #{tag}
                 </Chip>
@@ -89,12 +93,12 @@ export default function StepDetails({
 
           <div className="space-y-2">
             <Input
-              label="Ubicación"
-              placeholder="Añadir lugar..."
-              variant="bordered"
-              labelPlacement="outside"
               color="primary"
+              label="Ubicación"
+              labelPlacement="outside"
+              placeholder="Añadir lugar..."
               value={formData.location || ""}
+              variant="bordered"
               onValueChange={(val) => handleChange("location", val)}
             />
           </div>

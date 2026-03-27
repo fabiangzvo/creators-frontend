@@ -1,8 +1,15 @@
-'use client';
-import { useState, useCallback, JSX } from 'react';
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@heroui/modal';
-import { Button } from '@heroui/button';
-import clsx from 'clsx';
+"use client";
+import { useState, useCallback, JSX } from "react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@heroui/modal";
+import { Button } from "@heroui/button";
+import clsx from "clsx";
 
 interface ConfirmConfig {
   title: string;
@@ -25,38 +32,41 @@ interface ConfirmState extends ConfirmConfig {
 export function useConfirm(): UseConfirmReturn {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [state, setState] = useState<ConfirmState>({
-    title: '',
-    message: '',
-    onConfirm: () => { },
-    confirmText: 'Confirmar',
-    cancelText: 'Cancelar',
+    title: "",
+    message: "",
+    onConfirm: () => {},
+    confirmText: "Confirmar",
+    cancelText: "Cancelar",
     isDangerous: false,
-    isLoading: false
+    isLoading: false,
   });
 
-  const confirm = useCallback((config: ConfirmConfig) => {
-    setState(prev => ({
-      ...prev,
-      ...config,
-      isLoading: false
-    }));
-    onOpen();
-  }, [onOpen]);
+  const confirm = useCallback(
+    (config: ConfirmConfig) => {
+      setState((prev) => ({
+        ...prev,
+        ...config,
+        isLoading: false,
+      }));
+      onOpen();
+    },
+    [onOpen],
+  );
 
   const handleConfirm = async () => {
-    setState(prev => ({ ...prev, isLoading: true }));
+    setState((prev) => ({ ...prev, isLoading: true }));
     try {
       await state.onConfirm();
     } catch (error) {
-      console.error('confirm error:', error);
+      console.error("confirm error:", error);
     } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState((prev) => ({ ...prev, isLoading: false }));
       onOpenChange();
     }
   };
 
   const ConfirmDialog = (): JSX.Element => (
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop='blur'>
+    <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">{state.title}</ModalHeader>
         <ModalBody>
@@ -65,17 +75,17 @@ export function useConfirm(): UseConfirmReturn {
         <ModalFooter>
           <Button
             color="primary"
-            variant='light'
+            variant="light"
             onPress={() => onOpenChange()}
           >
             {state.cancelText}
           </Button>
           <Button
-            variant='solid'
-            color={state.isDangerous ? 'danger' : 'primary'}
-            onPress={handleConfirm}
+            className={clsx(state.isDangerous && "text-white")}
+            color={state.isDangerous ? "danger" : "primary"}
             isLoading={state.isLoading}
-            className={clsx(state.isDangerous && 'text-white')}
+            variant="solid"
+            onPress={handleConfirm}
           >
             {state.confirmText}
           </Button>

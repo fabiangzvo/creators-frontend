@@ -5,7 +5,7 @@ import { ListOption } from "@/components/formStepper/types";
 import { ChannelCardProps } from "@/components/facebookForm/components/channelCard/types";
 
 export async function getAccountInfo(
-  accessToken: string
+  accessToken: string,
 ): Promise<TiktokAccountInfo> {
   try {
     const response = await axios.get<{ data: TiktokAccountInfo }>(
@@ -19,7 +19,7 @@ export async function getAccountInfo(
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return response.data.data as TiktokAccountInfo;
@@ -31,7 +31,7 @@ export async function getAccountInfo(
 }
 
 export async function getTiktokAccountInfo(
-  accessToken: string
+  accessToken: string,
 ): Promise<string | ListOption[]> {
   const data = await getAccountInfo(accessToken);
 
@@ -48,7 +48,7 @@ export async function getTiktokAccountInfo(
 }
 
 export async function getTiktokChannelProps(
-  accessToken: string
+  accessToken: string,
 ): Promise<ChannelCardProps> {
   const data = await getAccountInfo(accessToken);
 

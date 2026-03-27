@@ -14,11 +14,12 @@ export interface Validators {
 export const validators: Validators = {
   required: (
     value: any,
-    message: string = "Este campo es obligatorio"
+    message: string = "Este campo es obligatorio",
   ): string | null => {
     if (!value || (typeof value === "string" && value.trim() === "")) {
       return message;
     }
+
     return null;
   },
 
@@ -28,6 +29,7 @@ export const validators: Validators = {
       if (value && value.length < min) {
         return message || `Mínimo ${min} caracteres`;
       }
+
       return null;
     },
 
@@ -37,14 +39,17 @@ export const validators: Validators = {
       if (value && value.length > max) {
         return message || `Máximo ${max} caracteres`;
       }
+
       return null;
     },
 
   email: (value: any, message: string = "Email inválido"): string | null => {
     if (value) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
       if (!emailRegex.test(value)) return message;
     }
+
     return null;
   },
 
@@ -54,6 +59,7 @@ export const validators: Validators = {
       if (value && !regex.test(value)) {
         return message || "Formato inválido";
       }
+
       return null;
     },
 
@@ -63,6 +69,7 @@ export const validators: Validators = {
       if (value && Number(value) < min) {
         return message || `Valor mínimo: ${min}`;
       }
+
       return null;
     },
 
@@ -72,6 +79,7 @@ export const validators: Validators = {
       if (value && Number(value) > max) {
         return message || `Valor máximo: ${max}`;
       }
+
       return null;
     },
 
@@ -81,6 +89,7 @@ export const validators: Validators = {
       if (!fn(value)) {
         return message || "Valor inválido";
       }
+
       return null;
     },
 };

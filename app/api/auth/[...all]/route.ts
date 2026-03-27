@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { toNextJsHandler } from "better-auth/next-js";
 

@@ -2,12 +2,11 @@
 
 import React from "react";
 import { Card, CardBody } from "@heroui/card";
-import { cn } from "@heroui/theme";
 import { Film, Image as ImageIcon, History, Layers } from "lucide-react";
+import { Button } from "@heroui/button";
+
 import FileImageUploader from "@/components/fileUpload/filepond-image-uploader";
 import { StepComponentProps } from "@/components/formStepper/types";
-import { Button } from "@heroui/button";
-import Banner from "@/components/banner";
 
 export default function StepFormat({
   formData,
@@ -22,7 +21,6 @@ export default function StepFormat({
 
   return (
     <div className="flex w-full h-full gap-6 p-4">
-
       {/* Format Selection Section */}
       <div className="w-1/2 flex flex-col gap-4">
         <div className="grid grid-cols-2 gap-4">
@@ -33,14 +31,14 @@ export default function StepFormat({
             return (
               <Button
                 key={format.id}
-                onPress={() => handleChange("format", format.id)}
+                className="transition-all duration-200 h-32"
                 color="primary"
                 variant={isSelected ? "solid" : "bordered"}
-                className="transition-all duration-200 h-32"
+                onPress={() => handleChange("format", format.id)}
               >
                 <CardBody className="flex flex-col items-center justify-center gap-2">
                   <Icon className="w-10 h-10" />
-                  <span className="text-lg font-medium">{format.label}</span>
+                  <span className="text-base font-medium">{format.label}</span>
                 </CardBody>
               </Button>
             );
@@ -53,17 +51,17 @@ export default function StepFormat({
           <CardBody className="flex flex-col items-center justify-center p-0 overflow-hidden">
             <div className="w-full h-full p-4">
               <FileImageUploader
-                name="media"
-                label="Cargar Multimedia"
+                allowMultiple={true}
                 description="Arrastra tus fotos o videos aquí. Soporta MP4, MOV, JPG, PNG de alta calidad."
                 files={formData.media}
+                label="Cargar Multimedia"
+                name="media"
                 setFiles={(files) => handleChange("media", files)}
-                allowMultiple={true}
               />
             </div>
           </CardBody>
         </Card>
       </div>
-    </div >
+    </div>
   );
 }

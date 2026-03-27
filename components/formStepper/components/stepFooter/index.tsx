@@ -1,9 +1,15 @@
-import { JSX, Fragment, useCallback, useMemo } from 'react'
-import { Button } from '@heroui/button';
-import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import { JSX, Fragment, useCallback, useMemo } from "react";
+import { Button } from "@heroui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { useCurrentStep, useFormStore, useIsSubmitting, useSteps } from '@/lib/store/form';
-import { StepFooterProps } from './types';
+import { StepFooterProps } from "./types";
+
+import {
+  useCurrentStep,
+  useFormStore,
+  useIsSubmitting,
+  useSteps,
+} from "@/lib/store/form";
 
 export default function StepFooter(props: StepFooterProps): JSX.Element {
   const { onComplete } = props;
@@ -14,35 +20,40 @@ export default function StepFooter(props: StepFooterProps): JSX.Element {
   const nextStep = useFormStore((state) => state.nextStep);
   const prevStep = useFormStore((state) => state.prevStep);
 
-  const { isFirstStep, isLastStep } = useMemo(() =>
-  ({
-    isFirstStep: currentStep === 0,
-    isLastStep: currentStep === steps.length - 1
-  }), [currentStep, steps])
+  const { isFirstStep, isLastStep } = useMemo(
+    () => ({
+      isFirstStep: currentStep === 0,
+      isLastStep: currentStep === steps.length - 1,
+    }),
+    [currentStep, steps],
+  );
 
-
-  const handleNextStep = useCallback(async () => await nextStep(onComplete), [nextStep, onComplete])
+  const handleNextStep = useCallback(
+    async () => await nextStep(onComplete),
+    [nextStep, onComplete],
+  );
 
   return (
     <Fragment>
       <Button
-        color='primary'
         className="font-semibold"
-        onPress={prevStep}
+        color="primary"
         isDisabled={isFirstStep || isSubmitting}
         startContent={<ChevronLeft />}
+        onPress={prevStep}
       >
         Anterior
       </Button>
       <Button
-        color='primary'
-        onPress={handleNextStep}
+        className="font-semibold"
+        color="primary"
+        endContent={!isLastStep && <ChevronRight />}
         isDisabled={isSubmitting}
         isLoading={isSubmitting}
-        className="font-semibold"
-        endContent={!isLastStep && <ChevronRight />}
+        onPress={handleNextStep}
       >
-        {isLastStep ? 'Finalizar' : 'Siguiente'}
-      </Button></Fragment>
-  )
+        {isLastStep ? "Finalizar" : "Siguiente"}
+      </Button>
+    </Fragment>
+  );
 }

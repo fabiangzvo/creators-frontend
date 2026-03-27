@@ -1,9 +1,9 @@
 import { ComponentType } from "react";
 import { SelectionMode } from "@react-types/shared";
 
-import { Providers } from "@/types/providers";
-
 import { ValidationFunction } from "./validators";
+
+import { Providers } from "@/types/providers";
 
 export interface FormStepperProps {
   steps: StepConfig[];

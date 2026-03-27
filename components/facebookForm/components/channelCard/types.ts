@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+
 import { Providers } from "@/types/providers";
 
 export interface ChannelCardProps {

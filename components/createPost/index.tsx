@@ -1,9 +1,10 @@
+import StepFormat from "./components/stepFormat";
+import StepDetails from "./components/stepDetails";
+import StepDistribution from "./components/stepDistribution";
+import StepSchedule from "./components/stepSchedule";
+import StepReview from "./components/stepReview";
+
 import { StepConfig } from "@/components/formStepper/types";
-import StepFormat from "./components/steps/StepFormat";
-import StepDetails from "./components/steps/StepDetails";
-import StepDistribution from "./components/steps/StepDistribution";
-import StepSchedule from "./components/steps/StepSchedule";
-import StepReview from "./components/steps/StepReview";
 
 export const createPostSteps: StepConfig[] = [
   {
@@ -26,12 +27,14 @@ export const createPostSteps: StepConfig[] = [
   },
   {
     id: "schedule",
-    title: "AGENDA",
+    title: "Canales de Distribución",
+    description: "Selecciona los canales donde quieres publicar",
     component: StepSchedule,
   },
   {
     id: "review",
-    title: "REVISIÓN",
+    title: "Revisa los detalles",
+    description: "Verifica los detalles antes de publicar.",
     component: StepReview,
   },
 ];

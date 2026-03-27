@@ -1,4 +1,4 @@
-import { useCallback, type JSX, KeyboardEvent, useState, ChangeEvent } from "react";
+import { useCallback, type JSX, useState, ChangeEvent } from "react";
 import { Input, InputProps } from "@heroui/input";
 import { SearchIcon } from "lucide-react";
 
@@ -41,8 +41,8 @@ function SearchInput({
         <SearchIcon className="text-base text-primary-400 pointer-events-none flex-shrink-0" />
       }
       variant={variant}
-      onClear={async () => await handleSearch("")}
       onChange={handleChange}
+      onClear={async () => await handleSearch("")}
     />
   );
 }
