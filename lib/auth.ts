@@ -1,4 +1,4 @@
-import { betterAuth, BetterAuthPlugin } from "better-auth";
+import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { instagram } from "better-auth-instagram";

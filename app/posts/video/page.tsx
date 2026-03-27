@@ -48,7 +48,8 @@ export default function VideoGeneratorPage() {
         <div className="space-y-2">
           <label
             className="text-sm font-medium leading-none text-gray-700 dark:text-gray-300"
-            htmlFor="prompt">
+            htmlFor="prompt"
+          >
             Prompt del video
           </label>
           <textarea
@@ -64,14 +65,16 @@ export default function VideoGeneratorPage() {
         <button
           className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 bg-blue-600 text-white shadow hover:bg-blue-700 h-10 px-4 py-2 w-full sm:w-auto"
           disabled={isGenerating || !prompt.trim()}
-          type="submit">
+          type="submit"
+        >
           {isGenerating ? (
             <>
               <svg
                 className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <circle
                   className="opacity-25"
                   cx="12"
@@ -120,7 +123,8 @@ export default function VideoGeneratorPage() {
               controls
               loop
               className="w-full h-full object-contain"
-              src={videoUrl}>
+              src={videoUrl}
+            >
               <track kind="captions" label="Español" srcLang="es" />
               Tu navegador no soporta el elemento de video.
             </video>
@@ -130,7 +134,8 @@ export default function VideoGeneratorPage() {
               className="text-sm text-blue-600 hover:text-blue-500 hover:underline dark:text-blue-400 dark:hover:text-blue-300"
               href={videoUrl}
               rel="noopener noreferrer"
-              target="_blank">
+              target="_blank"
+            >
               Abrir video original web
             </a>
           </div>
